@@ -20,6 +20,11 @@ int main(int argc, const char* argv[])
         std::string line;
         while(std::getline(std::cin, line))
         {
+                if(line.empty() || line.front() == '#')
+                {
+                        continue;
+                }
+
                 const auto s = split(line, ',');
                 print(arg, s);
         }
