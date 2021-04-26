@@ -32,7 +32,7 @@ constexpr const char* fstr[] = {
     "insert into groups\nvalues ({}, '{}');\n\n",
     "insert into tracks\nvalues ({}, {}, '{}', {}, {});\n\n",
     "insert into jobs\nvalues ({}, '{}', {}, {});\n\n",
-    "insert into employees\nvalues ({}, '{}', '{}', {}, '{}');\n\n",
+    "insert into employees\nvalues ({}, '{}', '{}', {}, '{}', {});\n\n",
     "insert into members\nvalues ({}, '{}', '{}', '{}', '{}', {});\n\n",
     "insert into albums\nvalues ({}, '{}', '{}', {});\n\n",
     "insert into subscriptions\nvalues ({}, '{}', {}, {}, {});\n\n",
@@ -84,7 +84,7 @@ void job(const auto& vec)
 
 void employee(const auto& vec)
 {
-        print(fstr[7], vec[0], vec[1], vec[2], vec[3], vec[4]);
+        print(fstr[7], vec[0], vec[1], vec[2], vec[3], vec[4], vec[5]);
 }
 
 void member(const auto& vec)
