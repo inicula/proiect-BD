@@ -17,15 +17,13 @@ int main(int argc, const char* argv[])
                 return 1;
         }
 
+        const auto func_ptr = ftable.at(arg);
         std::string line;
         while(std::getline(std::cin, line))
         {
-                if(line.empty() || line.front() == '#')
+                if(!line.empty() && line.front() != '#')
                 {
-                        continue;
+                        func_ptr(split(line, ','));
                 }
-
-                const auto s = split(line, ',');
-                print(arg, s);
         }
 }

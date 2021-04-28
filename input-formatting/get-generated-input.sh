@@ -9,7 +9,7 @@
 ./a.out customer < input/customers.in || exit
 ./a.out job < input/jobs.in || exit
 ./a.out employee < input/employees.in || exit
-./a.out substription < input/subscriptions.in || exit
+./a.out subscription < input/subscriptions.in || exit
 ./a.out album < input/albums.in || exit
 ./a.out track < input/tracks.in || exit
 ./a.out copy < input/copies.in || exit
