@@ -14,6 +14,7 @@ int main(int argc, const char* argv[])
         if(!ftable.contains(arg))
         {
                 fmt::print(stderr, "Format for type '{}' not found.\n", arg);
+                print_avail();
                 return 1;
         }
 

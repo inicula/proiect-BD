@@ -132,3 +132,14 @@ const std::unordered_map<std::string_view, formatfunc_t<std::string_view>> ftabl
     {"group_member", ftypes::group_member},
     {"country",      ftypes::country}
 };
+
+void print_avail()
+{
+        fmt::print(stderr, "Available formats:\n");
+
+        unsigned k = 1;
+        for(const auto& [type, fptr] : ftable)
+        {
+                fmt::print(stderr, "{}. {}\n", k++, type);
+        }
+}
