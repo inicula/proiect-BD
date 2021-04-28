@@ -25,18 +25,21 @@ template<typename T>
 using formatfunc_t = void (*)(const std::vector<T>&);
 
 constexpr const char* fstr[] = {
-    "insert into locations\nvalues ({}, '{}', '{}');\n\n",
+    "insert into locations\nvalues ({}, '{}', {});\n\n",
     "insert into customers\nvalues ({}, '{}', '{}', '{}');\n\n",
     "insert into copies\nvalues ({}, {}, '{}', {}, {});\n\n",
     "insert into categories\nvalues ({}, '{}');\n\n",
     "insert into groups\nvalues ({}, '{}');\n\n",
-    "insert into tracks\nvalues ({}, {}, '{}', {}, {});\n\n",
+    "insert into tracks\nvalues ({}, {}, '{}', {});\n\n",
     "insert into jobs\nvalues ({}, '{}', {}, {});\n\n",
     "insert into employees\nvalues ({}, '{}', '{}', {}, '{}', {});\n\n",
     "insert into members\nvalues ({}, '{}', '{}', '{}', '{}', {});\n\n",
-    "insert into albums\nvalues ({}, '{}', '{}', {});\n\n",
-    "insert into subscriptions\nvalues ({}, '{}', {}, {}, {});\n\n",
-    "insert into group_member\nvalues ({}, {}, '{}');\n\n"};
+    "insert into albums\nvalues ({}, '{}', '{}', {}, {});\n\n",
+    "insert into subscriptions\nvalues ({}, {}, {}, '{}');\n\n",
+    "insert into group_member\nvalues ({}, {}, '{}');\n\n",
+    "insert into countries\nvalues ({}, '{}');\n\n"
+
+};
 
 template<typename... Args>
 void print(const char* format_str, Args&&... args)
@@ -94,7 +97,7 @@ void member(const auto& vec)
 
 void album(const auto& vec)
 {
-        print(fstr[9], vec[0], vec[1], vec[2], vec[3]);
+        print(fstr[9], vec[0], vec[1], vec[2], vec[3], vec[4]);
 }
 
 void subscription(const auto& vec)
@@ -105,6 +108,11 @@ void subscription(const auto& vec)
 void group_member(const auto& vec)
 {
         print(fstr[11], vec[0], vec[1], vec[2]);
+}
+
+void country(const auto& vec)
+{
+        print(fstr[12], vec[0], vec[1]);
 }
 
 } // namespace ftypes
@@ -121,7 +129,9 @@ const std::unordered_map<std::string_view, formatfunc_t<std::string_view>> ftabl
     {"member",       ftypes::member},
     {"album",        ftypes::album},
     {"subscription", ftypes::subscription},
-    {"group_member", ftypes::group_member}};
+    {"group_member", ftypes::group_member},
+    {"country",      ftypes::country}
+};
 
 void print(const std::string_view arg, const auto& vec)
 {
