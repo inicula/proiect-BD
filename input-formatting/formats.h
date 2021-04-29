@@ -36,7 +36,7 @@ constexpr const char* fstr[] = {
     "insert into members\nvalues ({}, '{}', '{}', '{}', '{}', {});\n\n",
     "insert into albums\nvalues ({}, '{}', '{}', {}, {});\n\n",
     "insert into subscriptions\nvalues ({}, {}, {}, '{}');\n\n",
-    "insert into group_member\nvalues ({}, {}, '{}');\n\n",
+    "insert into group_members\nvalues ({}, {}, '{}');\n\n",
     "insert into countries\nvalues ({}, '{}');\n\n"
 
 };

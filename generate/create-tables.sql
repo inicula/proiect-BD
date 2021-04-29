@@ -74,12 +74,13 @@ create table customers(
         email      varchar(50)
 );
 
-create table copy(
+create table copies(
         album_id      number(3) not null references Albums(id),
         id            number(3) not null,
         serial_number varchar(8),
-        price         number(5)
-        customer_id   number(3) references Customers(id)
+        price         number(5),
+        customer_id   number(3) references Customers(id),
+        primary key   (album_id, id)
 );
 
 create table subscriptions(
