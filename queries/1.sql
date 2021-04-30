@@ -1,7 +1,7 @@
---Pentru fiecare Membru afișează id-ul, numele complet și informațiile
---despre fiecare track la care a contribuit. Track-ul trebuie să aparțină
---unui album ce are cel puțin o copie cumpărată și un 'a' în titlu,
---altfel nu se va afișa nimic.
+--Pentru fiecare Membru afiseaza id-ul, numele complet si informatiile
+--despre fiecare track la care a contribuit. Track-ul trebuie sa apartina
+--unui album ce are cel putin o copie vanduta si un 'a' in titlu,
+--altfel nu se va afisa nimic.
 
 select m.id,
        concat(concat(m.first_name, ' '), m.last_name),

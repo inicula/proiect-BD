@@ -1,7 +1,7 @@
---Pentru fiecare membru al cărui nume conține un 'e', afișează id-ul
---și numele lui, ziua lunii în care s-a născut, data decesului
---sau alt mesaj corespunzator dacă este în viață, vârsta sa exprimată
---în număr de luni. Se va afisa, in plus, 'DA/NU' daca membrul este/nu este
+--Pentru fiecare membru al carui nume contine un 'e', afiseaza id-ul
+--si numele sau, ziua lunii in care s-a nascut, data decesului
+--sau alt mesaj corespunzator daca este in viata, varsta sa exprimata
+--in numar de luni. Se va afisa, in plus, 'DA/NU' daca membrul este/nu este
 --nascut in Anglia si 'DA/NU' daca numele orasului in care s-a nascut
 --contine/nu contine un 'u'.
 

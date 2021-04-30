@@ -1,6 +1,6 @@
---Afișează titlul și durata pentru fiecare album cu durată mai
---mare decât 20(minute) și care este compus de un grup care are
---în componență cel puțin un membru al cărui nume începe cu 'G'.
+--Afiseaza titlul si durata pentru fiecare album cu durata mai
+--mare decat 20(minute) si care este compus de un grup care are
+--in componenta cel putin un membru al carui nume incepe cu 'G'.
 
 select a.title,
        sum(t.length)

@@ -1,4 +1,4 @@
---Afiseaza numele si durata pentru fiecare album cu durata mai mare
+--Afiseaza titlul si durata pentru fiecare album cu durata mai mare
 --decat media duratelor tuturor albumelor.
 
 with average_duration(average_duration_val)
