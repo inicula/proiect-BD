@@ -15,8 +15,8 @@ inner join albums a
       on g.id = a.group_id
 inner join tracks t
       on a.id = t.album_id
-where g_m.left_group_date is null or
-      g_m.left_group_date >= a.release_date and
+where (g_m.left_group_date is null or
+      g_m.left_group_date >= a.release_date) and
       a.id in (select a2.id
                from customers cust
                inner join copies cop
