@@ -90,3 +90,8 @@ create table subscriptions(
         expiry_date date not null,
         primary key(customer_id, category_id, employee_id, expiry_date)
 );
+
+create sequence seq_member_id
+minvalue 1
+start with 1
+increment by 1;
