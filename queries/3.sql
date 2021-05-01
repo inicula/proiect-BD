@@ -8,9 +8,12 @@
 select m.id,
        m.last_name,
        to_char(m.date_birth, 'dd')           as "Ziua lunii nastere",
-       nvl(m.date_death, 'in viata')         as "Decedat?",
-       months_between(sysdate, m.date_birth) as "Varsta in nr. luni",
-       decode(c.name, 'England', 'DA'
+       nvl(to_char(m.date_death),
+           'in viata')                       as "Decedat?",
+       trunc(months_between(sysdate,
+                            m.date_birth), 
+             0)                              as "Varsta in nr. luni",
+       decode(c.name, 'England', 'DA',
                                  'NU')       as "Nascut in Anglia?",
        case
           when lower(l.city) like '%u%'

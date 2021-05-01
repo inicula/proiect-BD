@@ -9,10 +9,10 @@ inner join tracks t
       on a.id = t.album_id
 where exists(select m.last_name
              from groups g
-             inner join group_members
-                   on g.id = group_members.group_id
+             inner join group_members g_m
+                   on g.id = g_m.group_id
              inner join members m
-                   on g.member_id = m.id
+                   on g_m.member_id = m.id
              where g.id = a.group_id and
                    lower(m.last_name) like 'g%')
 group by a.id, a.title

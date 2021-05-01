@@ -23,5 +23,5 @@ where (g_m.left_group_date is null or
                      on cust.id = cop.customer_id
                inner join albums a2
                      on cop.album_id = a2.id
-               where lower(a2.title))
+               where lower(a2.title) like '%a%')
 order by m.id desc;
