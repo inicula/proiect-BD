@@ -1,0 +1,14 @@
+drop table albums;
+drop table categories;
+drop table copies;
+drop table countries;
+drop table customers;
+drop table employees;
+drop table group_members;
+drop table groups;
+drop table jobs;
+drop table locations;
+drop table members;
+drop table subscriptions;
+drop table tracks;
+drop sequence seq_member_id;

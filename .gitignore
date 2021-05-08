@@ -2,5 +2,6 @@ input-formatting/res.txt
 input-formatting/a.out
 input-formatting/test.txt
 input-formatting/generated.sql
+input-formatting/output/insertions.sql
 queries/temp.sql
 util/a.out
