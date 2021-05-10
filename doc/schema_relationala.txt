@@ -1,0 +1,62 @@
+COUNTRY (id#,
+         name)
+
+LOCATION (id#,
+          city,
+          country_id#)
+
+MEMBER (id#,
+        first_name,
+        last_name,
+        date_birth,
+        date_death,
+        location_id#)
+
+GROUP (id#,
+       name)
+
+GROUP_MEMBER (group_id#,
+              member_id#,
+              left_group_date)
+
+CATEGORY (id#,
+          title)
+
+ALBUM (id#,
+       title#,
+       release_date,
+       category_id#,
+       group_id#)
+
+TRACK (album_id#,
+       id#,
+       title,
+       length)
+
+JOB (id#,
+     title,
+     min_salary,
+     max_salary)
+
+EMPLOYEE (id#,
+          first_name,
+          last_name,
+          salary,
+          hire_date,
+          job_id#)
+
+CUSTOMER (id#,
+          first_name,
+          last_name,
+          email)
+
+COPY (album_id#,
+      id#,
+      serial_number,
+      price,
+      customer_id#)
+
+SUBSCRIPTION (customer_id#,
+              category_id#,
+              employee_id#,
+              expiry_date#)
