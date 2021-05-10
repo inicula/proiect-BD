@@ -1,14 +1,14 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,oneside, 12pt]{article}
 \usepackage[romanian,english]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[final]{pdfpages}
 \usepackage{listings}
-\usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage[margin=0.5in]{geometry}
 \usepackage{textcomp}
 \usepackage{color}
-\usepackage{mathptmx}
 \usepackage{pdflscape}
+\usepackage{hyperref}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -54,8 +54,8 @@
     \ifnum#1<10 0\fi#1 |%
 }
 
-\author{Nicula Ionuț-Cosmin}
 \title{Management-ul unui magazin de muzică}
+\author{Nicula Ionuț-Cosmin \\ \emph{mail: }\texttt{ionut.nicula@s.unibuc.ro} \\ \emph{surse: }\texttt{github.com/niculaionut/proiect-BD}}
 
 \begin{document}
 
@@ -71,9 +71,13 @@
 
 \section{Descrierea atributelor}
 
-\section{Diagrama entitate-relație}
+\section{Diagrama entitate-relație (pagina următoare)}
 
-\section{Diagrama conceptuală}
+\includepdf[pages=-]{../../img/diagrama_conceptuala.pdf}
+
+\section{Diagrama conceptuală (pagina următoare)}
+
+\includepdf[pages=-]{../../img/diagrama_conceptuala.pdf}
 
 \section{Schemele relaționale}
 

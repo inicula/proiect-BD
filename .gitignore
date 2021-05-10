@@ -5,3 +5,8 @@ input-formatting/generated.sql
 input-formatting/output/insertions.sql
 queries/temp.sql
 util/a.out
+draft/tex/*.aux
+draft/tex/*latexmk
+draft/tex/*.fls
+draft/tex/*.log
+draft/tex/*.pdf
