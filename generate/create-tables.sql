@@ -88,7 +88,7 @@ create table subscriptions(
         category_id number(3) not null references Categories(id),
         employee_id number(3) not null references Employees(id),
         expiry_date date not null,
-        primary key(customer_id, category_id, employee_id, expiry_date)
+        primary key(customer_id, category_id, expiry_date)
 );
 
 create sequence seq_member_id
