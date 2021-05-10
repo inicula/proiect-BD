@@ -20,7 +20,7 @@ select m.id,
           when lower(l.city) like '%u%'
                then 'DA'
           else      'NU'
-       end                                   as "Numele orasului contine 'u'?"
+       end                                   as "Numele orasului contine 'u'"
 from members m
 inner join locations l
       on m.birth_location_id = l.id
