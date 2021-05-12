@@ -1,6 +1,6 @@
 --Prelungeste pana la 1 ianuarie 2022 toate abonamentele care au
 --expirat in anul 2020 si care au fost facute de un angajat al
---al carui nume contine numar impar de litere.
+--carui nume contine numar impar de litere.
 
 update subscriptions s
 set s.expiry_date = to_date('01/01/2022')

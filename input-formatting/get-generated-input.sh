@@ -2,7 +2,7 @@
 
 ./a.out country < input/countries.in || exit
 ./a.out location < input/locations.in || exit
-./a.out member < input/members.in || exit
+./a.out artist < input/artists.in || exit
 ./a.out group < input/groups.in || exit
 ./a.out group_member < input/group_members.in || exit
 ./a.out category < input/categories.in || exit

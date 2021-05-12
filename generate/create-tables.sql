@@ -9,7 +9,7 @@ create table locations(
         country_id number(3) references countries(id)
 );
 
-create table members(
+create table artists(
         id                number(3) not null primary key,
         first_name        varchar(50),
         last_name         varchar(50),
@@ -25,7 +25,7 @@ create table groups(
 
 create table group_members(
         group_id        number(3) not null references Groups(id),
-        member_id       number(3) not null references Members(id),
+        member_id       number(3) not null references Artists(id),
         left_group_date date,
         primary key     (group_id, member_id)
 );

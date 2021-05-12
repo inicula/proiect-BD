@@ -5,7 +5,7 @@ LOCATION (id#,
           city,
           country_id#)
 
-MEMBER (id#,
+ARTIST (id#,
         first_name,
         last_name,
         date_birth,

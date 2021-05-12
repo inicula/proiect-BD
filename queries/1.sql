@@ -3,12 +3,12 @@
 --unui album ce are cel putin o copie vanduta si un 'a' in titlu,
 --altfel nu se va afisa nimic.
 
-select m.id,
-       concat(concat(m.first_name, ' '), m.last_name),
+select art.id,
+       concat(concat(art.first_name, ' '), art.last_name),
        t.*
-from members m
+from artists art
 inner join group_members g_m
-      on m.id = g_m.member_id
+      on art.id = g_m.member_id
 inner join groups g
       on g_m.group_id = g.id
 inner join albums a
@@ -24,4 +24,4 @@ where (g_m.left_group_date is null or
                inner join albums a2
                      on cop.album_id = a2.id
                where lower(a2.title) like '%a%')
-order by m.id desc;
+order by art.id desc;

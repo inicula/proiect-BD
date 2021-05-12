@@ -7,13 +7,13 @@ select a.title,
 from albums a
 inner join tracks t
       on a.id = t.album_id
-where exists(select m.last_name
+where exists(select art.last_name
              from groups g
              inner join group_members g_m
                    on g.id = g_m.group_id
-             inner join members m
-                   on g_m.member_id = m.id
+             inner join artists art
+                   on g_m.member_id = art.id
              where g.id = a.group_id and
-                   lower(m.last_name) like 'g%')
+                   lower(art.last_name) like 'g%')
 group by a.id, a.title
 having sum(t.length) > 20;

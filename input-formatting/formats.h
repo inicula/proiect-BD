@@ -33,7 +33,7 @@ constexpr const char* fstr[] = {
     "insert into tracks\nvalues ({}, {}, '{}', {});\n\n",
     "insert into jobs\nvalues ({}, '{}', {}, {});\n\n",
     "insert into employees\nvalues ({}, '{}', '{}', {}, '{}', {});\n\n",
-    "insert into members\nvalues (seq_member_id.nextval, '{}', '{}', '{}', '{}', {});\n\n",
+    "insert into artists\nvalues (seq_artist_id.nextval, '{}', '{}', '{}', '{}', {});\n\n",
     "insert into albums\nvalues ({}, '{}', '{}', {}, {});\n\n",
     "insert into subscriptions\nvalues ({}, {}, {}, '{}');\n\n",
     "insert into group_members\nvalues ({}, {}, '{}');\n\n",
@@ -90,7 +90,7 @@ void employee(const auto& vec)
         print(fstr[7], vec[0], vec[1], vec[2], vec[3], vec[4], vec[5]);
 }
 
-void member(const auto& vec)
+void artist(const auto& vec)
 {
         print(fstr[8], vec[0], vec[1], vec[2], vec[3], vec[4]);
 }
@@ -126,7 +126,7 @@ const std::unordered_map<std::string_view, formatfunc_t<std::string_view>> ftabl
     {"track",        ftypes::track},
     {"job",          ftypes::job},
     {"employee",     ftypes::employee},
-    {"member",       ftypes::member},
+    {"artist",       ftypes::artist},
     {"album",        ftypes::album},
     {"subscription", ftypes::subscription},
     {"group_member", ftypes::group_member},
