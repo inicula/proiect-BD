@@ -1,11 +1,11 @@
 --Pentru fiecare artist, afiseaza numele si prenumele sau si
---informatii despre track din albume la care a contribuit.
+--informatii despre track-urile din albume la care a contribuit.
 --Coloanele aferente artistilor care nu au asociat niciun album
 --vor aparea cu valori 'null'.
 
 select art.first_name,
        art.last_name,
-       group.name,
+       g.name,
        a.title,
        a.release_date,
        t.title,
