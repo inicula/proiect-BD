@@ -10,9 +10,9 @@ where to_char(s.expiry_date, 'yyyy') = '2020' and
              where e.id = s.employee_id and
                    mod(length(e.last_name), 2) = 1);
 
---In urma stergerii unor copii din baza de date, au ramas clienti
---care nu au asociata nicio copie cumparata anterior. Sterge acesti
---clienti din tabela Customers.
+--Se presupune ca in urma stergerii unor copii din baza de date,
+--au ramas clienti care nu au asociata nicio copie cumparata anterior.
+--Sterge acesti clienti din tabela Customers
 
 delete from customers cust
 where not exists(select c.id

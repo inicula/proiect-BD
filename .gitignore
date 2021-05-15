@@ -9,4 +9,4 @@ draft/tex/*.aux
 draft/tex/*latexmk
 draft/tex/*.fls
 draft/tex/*.log
-draft/tex/*.pdf
+draft/tex/main.out
