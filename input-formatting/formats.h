@@ -38,7 +38,6 @@ constexpr const char* fstr[] = {
     "insert into subscriptions\nvalues ({}, {}, {}, '{}');\n\n",
     "insert into group_members\nvalues ({}, {}, '{}');\n\n",
     "insert into countries\nvalues ({}, '{}');\n\n"
-
 };
 
 template<typename... Args>

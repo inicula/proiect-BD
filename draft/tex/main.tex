@@ -9,6 +9,7 @@
 \usepackage{color}
 \usepackage{pdflscape}
 \usepackage{hyperref}
+\usepackage{enumitem}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -68,6 +69,51 @@
 \section{Descrierea entităților}
 
 \section{Descrierea relațiilor}
+
+\begin{enumerate}[label=\roman*.]
+
+        \item \textbf{LOCATION} \emph{se află în} \textbf{COUNTRY}:
+                \\--Identifică țara în care se află o locație.
+                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+
+        \item \textbf{ARTIST} \emph{este născut în} \textbf{LOCATION}:
+                \\--Identifică locația în care un artist este născut.
+                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+
+        \item \textbf{ARTIST} \emph{face parte din} \textbf{GROUP}:
+                \\--Realizează legătura dintre membru și grupurile din care face parte.
+                \\--Are cardinalitatea {\texttt{M(1):M(0)}.}
+
+        \item \textbf{ALBUM} \emph{este compus de} \textbf{GROUP}:
+                \\--Realizează legătura dintre membru și grupurile din care face parte.
+                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+
+        \item \textbf{TRACK} \emph{face parte din} \textbf{ALBUM}:
+                \\--Realizează legătura dintre membru și grupurile din care face parte.
+                \\--Are cardinalitatea {\texttt{M(1):1(1)}.}
+
+        \item \textbf{ALBUM} \emph{face parte din} \textbf{CATEGORY}:
+                \\--Realizează legătura dintre membru și grupurile din care face parte.
+                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+
+        \item \textbf{COPY} \emph{este copie a albumului} \textbf{ALBUM}:
+                \\--Realizează legătura dintre membru și grupurile din care face parte.
+                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+
+        \item \textbf{EMPLOYEE} \emph{este angajat ca} \textbf{JOB}:
+                \\--Realizează legătura dintre membru și grupurile din care face parte.
+                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+
+        \item \textbf{CUSTOMER} \emph{cumpără} \textbf{COPY}:
+                \\--Realizează legătura dintre membru și grupurile din care face parte.
+                \\--Are cardinalitatea {\texttt{1(0):M(0)}.}
+                \\--O copie se consideră cumparată dacă are asociată o înregistrare de tip client.
+
+        \item \textbf{CUSTOMER} \emph{se abonează la} \textbf{CATEGORY} \emph{prin intermediul} \textbf{EMPLOYEE}:
+                \\--Realizează legătura dintre membru și grupurile din care face parte.
+                \\--Are cardinalitatea {\texttt{M(0):M(1)}.}
+
+\end{enumerate}
 
 \section{Descrierea atributelor}
 

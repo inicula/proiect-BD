@@ -3,14 +3,14 @@ COUNTRY (id#,
 
 LOCATION (id#,
           city,
-          country_id#)
+          country_id)
 
 ARTIST (id#,
         first_name,
         last_name,
         date_birth,
         date_death,
-        location_id#)
+        location_id)
 
 GROUP (id#,
        name)
@@ -23,10 +23,10 @@ CATEGORY (id#,
           title)
 
 ALBUM (id#,
-       title#,
+       title,
        release_date,
-       category_id#,
-       group_id#)
+       category_id,
+       group_id)
 
 TRACK (album_id#,
        id#,
@@ -43,7 +43,7 @@ EMPLOYEE (id#,
           last_name,
           salary,
           hire_date,
-          job_id#)
+          job_id)
 
 CUSTOMER (id#,
           first_name,
@@ -54,9 +54,9 @@ COPY (album_id#,
       id#,
       serial_number,
       price,
-      customer_id#)
+      customer_id)
 
 SUBSCRIPTION (customer_id#,
               category_id#,
-              employee_id#,
+              employee_id,
               expiry_date#)
