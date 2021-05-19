@@ -7,20 +7,21 @@
 
 select art.id,
        art.last_name,
-       to_char(art.date_birth, 'dd')         as "Ziua lunii nastere",
+       to_char(art.date_birth, 'dd')   as "Ziua lunii nastere",
        nvl(to_char(art.date_death),
-           'in viata')                       as "Decedat?",
-       trunc(months_between(nvl(art.date_death,
-                                sysdate),
-                            art.date_birth),
-             0)                              as "Varsta in nr. luni",
+           'in viata')                 as "Decedat?",
+       trunc(months_between(
+                nvl(art.date_death,
+                    sysdate),
+                art.date_birth),
+             0)                        as "Varsta in nr. luni",
        decode(c.name, 'England', 'DA',
-                                 'NU')       as "Nascut in Anglia?",
+                                 'NU') as "Nascut in Anglia?",
        case
           when lower(l.city) like '%u%'
                then 'DA'
           else      'NU'
-       end                                   as "Numele orasului contine 'u'"
+       end                             as "Numele orasului contine 'u'"
 from artists art
 inner join locations l
       on art.birth_location_id = l.id
