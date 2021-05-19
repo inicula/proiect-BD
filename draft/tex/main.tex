@@ -15,6 +15,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[scaled=0.9]{DejaVuSansMono}
 \usepackage[stable]{footmisc}
+\usepackage{xspace}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -63,10 +64,10 @@
 \newlist{m_itemize}{itemize}{1}
 \setlist[m_itemize]{label=\textbullet, noitemsep, topsep=0pt, after=\vspace{.4\baselineskip}}
 
-\newcommand{\str}{\emph{șir de caractere} }
-\newcommand{\idt}{\emph{identifier} }
-\newcommand{\datet}{\emph{dată calendaristică} }
-\newcommand{\nnull}{\emph{not null} }
+\newcommand{\str}{\emph{șir de caractere}\xspace}
+\newcommand{\idt}{\emph{identifier}\xspace}
+\newcommand{\datet}{\emph{dată calendaristică}\xspace}
+\newcommand{\nnull}{\emph{not null}\xspace}
 
 \title{Management-ul unui magazin de muzică}
 \author{Nicula Ionuț-Cosmin \\ \emph{mail: }\texttt{ionut.nicula@s.unibuc.ro} \\\hspace{35pt}\texttt{niculaionut@tutanota.com}
@@ -155,7 +156,7 @@ Entitatea \texttt{Track} are drept cheie primară tuplul \texttt{<album\_id, id>
 
 Entitatea \texttt{Copy} are drept cheie primară tuplul \texttt{<album\_id, id>}.
 
-Fiecare entitate dintre toate celelalte are în componență un atribut \texttt{id} ce reprezintă cheia primară.
+Fiecare entitate dintre toate celelalte are în componență un atribut \texttt{id} care reprezintă cheia primară.
 
 
 \section{Descrierea relațiilor}
@@ -218,8 +219,8 @@ Fiecare entitate dintre toate celelalte are în componență un atribut \texttt{
 
 \item \textbf{CUSTOMER} \emph{se abonează la} \textbf{CATEGORY} \emph{prin intermediul} \textbf{EMPLOYEE}:
         \begin{m_itemize}
-                \item Realizează legătura dintre client, categorie și angajat.
-                \item Reprezintă un abonament prin prisma căruia se pot trimite clientului oferte, reduceri, etc.
+                \item Realizează legătura dintre client, categorie și angajat;
+                \item Reprezintă un abonament prin prisma căruia se pot trimite clientului oferte, reduceri, etc;
                 \item Are cardinalitatea \texttt{M(0):M(0):M(0)}.
         \end{m_itemize}
 
@@ -234,25 +235,26 @@ Numele entităților, împreună cu numele atributelor și descrierea fiecăruia
 \item \textbf{COUNTRY}:
         \begin{m_itemize}
                 \item \emph{id}: variabilă de tip \idt\footnote{Deoarece toate atributele
-                      de tip \emph{id} au aceeași reprezentare în baza de date,
-                      tipul \emph{identifier} se consideră o notație pentru un număr natural
-                      de maxim 3 cifre. De asemenea, toate atributele de acest tip au constrângerea \nnull} ce reprezintă id-ul țării
-                \item \emph{name}: variabilă de tip \emph{șir de caractere}\footnote{Toate atributele de tip \emph{șir de caractere} vor avea lungimea maximă egală cu 50.} ce reprezintă numele țării
+                      de tip \emph{id} vor avea aceeași reprezentare în baza de date,
+                      tipul \emph{identifier} se consideră o notație pentru \emph{număr natural
+                      de maxim 3 cifre}. De asemenea, toate atributele de acest
+                      tip au constrângerea \nnull} care reprezintă id-ul țării;
+                \item \emph{name}: variabilă de tip \emph{șir de caractere}\footnote{Toate atributele de tip \emph{șir de caractere} vor avea lungimea maximă egală cu 50.} care reprezintă numele țării.
         \end{m_itemize}
 
 \item \textbf{LOCATION}:
         \begin{m_itemize}
-                \item id: variabilă de tip \idt care reprezintă id-ul locației
-                \item city: variabilă de tip \str care reprezintă numele orașului locației
+                \item \emph{id}: variabilă de tip \idt  care reprezintă id-ul locației;
+                \item \emph{city}: variabilă de tip \str care reprezintă numele orașului locației.
         \end{m_itemize}
 
 \item \textbf{ARTIST}:
         \begin{m_itemize}
-                \item id: variabilă de tip \idt care reprezintă id-ul artistului
-                \item first\_name: variabilă de tip \str care reprezintă prenumele artistului
-                \item last\_name: variabilă de tip \str care reprezintă numele artistului
-                \item date\_birth: variabilă de tip \datet care reprezintă data nașterii artistului
-                \item date\_birth: variabilă de tip \datet care reprezintă data decesului artistului
+                \item \emph{id}: variabilă de tip \idt care reprezintă id-ul artistului;
+                \item \emph{first\_name}: variabilă de tip \str care reprezintă prenumele artistului;
+                \item \emph{last\_name}: variabilă de tip \str care reprezintă numele artistului;
+                \item \emph{date\_birth}: variabilă de tip \datet care reprezintă data nașterii artistului;
+                \item \emph{date\_birth}: variabilă de tip \datet care reprezintă data decesului artistului.
         \end{m_itemize}
 
 \item \textbf{GROUP}:
