@@ -1,4 +1,4 @@
-\documentclass[a4paper,oneside, 12pt]{article}
+\documentclass[a4paper, oneside, 12pt]{article}
 \usepackage[english, romanian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{pdfpages}
@@ -6,10 +6,13 @@
 \usepackage{xcolor}
 \usepackage[margin=0.5in]{geometry}
 \usepackage{textcomp}
+\usepackage{mathptmx}
 \usepackage{color}
 \usepackage{pdflscape}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{DejaVuSansMono}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -55,8 +58,12 @@
     \ifnum#1<10 0\fi#1 |%
 }
 
+\newlist{m_itemize}{itemize}{1}
+\setlist[m_itemize]{label=\textbullet, noitemsep, topsep=0pt, after=\vspace{.4\baselineskip}}
+
 \title{Management-ul unui magazin de muzică}
-\author{Nicula Ionuț-Cosmin \\ \emph{mail: }\texttt{ionut.nicula@s.unibuc.ro} \\ \emph{surse: }\texttt{github.com/niculaionut/proiect-BD}}
+\author{Nicula Ionuț-Cosmin \\ \emph{mail: }\texttt{ionut.nicula@s.unibuc.ro}
+\\ \emph{surse: }\texttt{github.com/niculaionut/proiect-BD}}
 
 \begin{document}
 
@@ -70,48 +77,68 @@
 
 \section{Descrierea relațiilor}
 
-\begin{enumerate}[label=\roman*.]
+\begin{enumerate}[noitemsep, label=\roman*.]
 
-        \item \textbf{LOCATION} \emph{se află în} \textbf{COUNTRY}:
-                \\--Identifică țara în care se află o locație.
-                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+\item \textbf{LOCATION} \emph{se află în} \textbf{COUNTRY}:
+        \begin{m_itemize}%[noitemsep, topsep=0pt, after=\vspace{.5\baselineskip}]
+                \item Identifică țara în care se află o locație.
+                \item Are cardinalitatea {\texttt{M(0):1(1)}.}
+        \end{m_itemize}
 
-        \item \textbf{ARTIST} \emph{este născut în} \textbf{LOCATION}:
-                \\--Identifică locația în care un artist este născut.
-                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+\item \textbf{ARTIST} \emph{este născut în} \textbf{LOCATION}:
+        \begin{m_itemize}
+                \item Identifică locația în care un artist este născut.
+                \item Are cardinalitatea {\texttt{M(0):1(1)}.}
+        \end{m_itemize}
 
-        \item \textbf{ARTIST} \emph{face parte din} \textbf{GROUP}:
-                \\--Realizează legătura dintre membru și grupurile din care face parte.
-                \\--Are cardinalitatea {\texttt{M(1):M(0)}.}
+\item \textbf{ARTIST} \emph{face parte din} \textbf{GROUP}:
+        \begin{m_itemize}
+                \item Realizează legătura dintre artist și grupurile din care face parte.
+                \item Are cardinalitatea {\texttt{M(1):M(0)}.}
+        \end{m_itemize}
 
-        \item \textbf{ALBUM} \emph{este compus de} \textbf{GROUP}:
-                \\--Realizează legătura dintre membru și grupurile din care face parte.
-                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+\item \textbf{ALBUM} \emph{este compus de} \textbf{GROUP}:
+        \begin{m_itemize}
+                \item Realizează legătura dintre membru și grupurile din care face parte.
+                \item Are cardinalitatea {\texttt{M(0):1(1)}.}
+        \end{m_itemize}
 
-        \item \textbf{TRACK} \emph{face parte din} \textbf{ALBUM}:
-                \\--Realizează legătura dintre membru și grupurile din care face parte.
-                \\--Are cardinalitatea {\texttt{M(1):1(1)}.}
+\item \textbf{TRACK} \emph{face parte din} \textbf{ALBUM}:
+        \begin{m_itemize}
+                \item Realizează legătura dintre membru și grupurile din care face parte.
+                \item Are cardinalitatea {\texttt{M(1):1(1)}.}
+        \end{m_itemize}
 
-        \item \textbf{ALBUM} \emph{face parte din} \textbf{CATEGORY}:
-                \\--Realizează legătura dintre membru și grupurile din care face parte.
-                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+\item \textbf{ALBUM} \emph{face parte din} \textbf{CATEGORY}:
+        \begin{m_itemize}
+                \item Realizează legătura dintre membru și grupurile din care face parte.
+                \item Are cardinalitatea {\texttt{M(0):1(1)}.}
+        \end{m_itemize}
 
-        \item \textbf{COPY} \emph{este copie a albumului} \textbf{ALBUM}:
-                \\--Realizează legătura dintre membru și grupurile din care face parte.
-                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+\item \textbf{COPY} \emph{este copie a albumului} \textbf{ALBUM}:
+        \begin{m_itemize}
+                \item Realizează legătura dintre membru și grupurile din care face parte.
+                \item Are cardinalitatea {\texttt{M(0):1(1)}.}
+        \end{m_itemize}
 
-        \item \textbf{EMPLOYEE} \emph{este angajat ca} \textbf{JOB}:
-                \\--Realizează legătura dintre membru și grupurile din care face parte.
-                \\--Are cardinalitatea {\texttt{M(0):1(1)}.}
+\item \textbf{EMPLOYEE} \emph{este angajat ca} \textbf{JOB}:
+        \begin{m_itemize}
+                \item Realizează legătura dintre membru și grupurile din care face parte.
+                \item Are cardinalitatea {\texttt{M(0):1(1)}.}
+        \end{m_itemize}
 
-        \item \textbf{CUSTOMER} \emph{cumpără} \textbf{COPY}:
-                \\--Realizează legătura dintre membru și grupurile din care face parte.
-                \\--Are cardinalitatea {\texttt{1(0):M(0)}.}
-                \\--O copie se consideră cumparată dacă are asociată o înregistrare de tip client.
+\item \textbf{CUSTOMER} \emph{cumpără} \textbf{COPY}:
+        \begin{m_itemize}
+                \item Realizează legătura dintre membru și grupurile din care face parte.
+                \item Are cardinalitatea {\texttt{1(0):M(0)}.}
+                \item O copie se consideră cumparată dacă are asociată o înregistrare de tip client.
+        \end{m_itemize}
 
-        \item \textbf{CUSTOMER} \emph{se abonează la} \textbf{CATEGORY} \emph{prin intermediul} \textbf{EMPLOYEE}:
-                \\--Realizează legătura dintre membru și grupurile din care face parte.
-                \\--Are cardinalitatea {\texttt{M(0):M(1)}.}
+\item \textbf{CUSTOMER} \emph{se abonează la} \textbf{CATEGORY} \emph{prin intermediul} \textbf{EMPLOYEE}:
+        \begin{m_itemize}
+                \item Realizează legătura dintre membru și grupurile din care face parte.
+                \item Are cardinalitatea {\texttt{M(0):M(0):M(0)}.}
+        \end{m_itemize}
 
 \end{enumerate}
 
@@ -144,19 +171,25 @@ screenshots go here
 \begin{center}
 
 \minipage{\linewidth}
-\lstinputlisting[caption=\centering{Operație \emph{join} pe minimum 4 tabele{,} filtrare la nivel de linii{,} subcerere nesincronizată{,} ordonare{,} funcții pe șiruri de caractere}]{../../queries/1.sql}
+\lstinputlisting[caption=\centering{Operație \emph{join} pe minimum 4 tabele{,}
+filtrare la nivel de linii{,} subcerere nesincronizată{,} ordonare{,} funcții
+pe șiruri de caractere}]{../../queries/1.sql}
 \endminipage
 
 \minipage{\linewidth}
-\lstinputlisting[caption=\centering{Subcerere sincronizată{,} grupări{,} funcții grup{,} filtrare la nivel de grupuri{,} operații pe șiruri de caractere}]{../../queries/2.sql}
+\lstinputlisting[caption=\centering{Subcerere sincronizată{,} grupări{,}
+funcții grup{,} filtrare la nivel de grupuri{,} operații pe șiruri de
+caractere}]{../../queries/2.sql}
 \endminipage
 
 \minipage{\linewidth}
-\lstinputlisting[caption=\textbf{NVL}{,} \textbf{DECODE}{,} \textbf{CASE}{,} funcții pe date calendaristice{,} funcții pe șiruri de caractere]{../../queries/3.sql}
+\lstinputlisting[caption=\texttt{NVL}{,} \texttt{DECODE}{,} \texttt{CASE}{,}
+funcții pe date calendaristice{,} funcții pe șiruri de
+caractere]{../../queries/3.sql}
 \endminipage
 
 \minipage{\linewidth}
-\lstinputlisting[caption=Clauza \textbf{WITH}]{../../queries/4.sql}
+\lstinputlisting[caption=Clauza \texttt{WITH}]{../../queries/4.sql}
 \endminipage
 
 \minipage{\linewidth}
