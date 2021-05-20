@@ -1,4 +1,4 @@
---Pentru fiecare artist, afiseaza numele si prenumele sau si
+--Pentru fiecare artist, afiseaza numele si prenumele lui si
 --informatii despre track-urile din albume la care a contribuit.
 --Coloanele aferente artistilor care nu au asociat niciun album
 --vor aparea cu valori 'null'.

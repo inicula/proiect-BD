@@ -1,5 +1,5 @@
 --Pentru fiecare artist al carui nume contine un 'e', afiseaza id-ul
---si numele sau, ziua lunii in care s-a nascut, data decesului
+--si numele lui, ziua lunii in care s-a nascut, data decesului
 --sau alt mesaj corespunzator daca este in viata, varsta sa exprimata
 --in numar de luni. Se va afisa, in plus, 'DA/NU' daca artistul este/nu este
 --nascut in Anglia si 'DA/NU' daca numele orasului in care s-a nascut

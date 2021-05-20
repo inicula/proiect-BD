@@ -154,7 +154,8 @@ Numele entităților, împreună cu descrierea acestora:
 \item \textbf{CUSTOMER}:
         \begin{m_itemize}
                 \item Entitate care reprezintă un client înregistrat pe site-ul magazinului.
-                \item Acesta poate cumpăra copii fizice ale albumelor și se poate abona la categoriile disponibile pe site-ul magazinului.
+                \item Acesta poate cumpăra copii fizice ale albumelor și se
+                      poate abona la categoriile disponibile pe site-ul magazinului.
         \end{m_itemize}
 
 \item \textbf{EMPLOYEE}:
@@ -170,11 +171,11 @@ Numele entităților, împreună cu descrierea acestora:
 
 \end{enumerate}
 
-Entitatea \texttt{Track} are drept cheie primară tuplul \texttt{<album\_id, id>}.
+Entitatea \textbf{Track} are drept cheie primară perechea \textbf{<album\_id, id>}.
 
-Entitatea \texttt{Copy} are drept cheie primară tuplul \texttt{<album\_id, id>}.
+Entitatea \textbf{Copy} are drept cheie primară perechea \textbf{<album\_id, id>}.
 
-Fiecare entitate dintre toate celelalte are în componență un atribut \texttt{id} care reprezintă cheia primară.
+Fiecare entitate dintre toate celelalte are în componență un atribut \textbf{id} care reprezintă cheia primară.
 
 
 \section{Descrierea relațiilor}
@@ -254,7 +255,9 @@ Numele entităților, împreună cu numele atributelor și descrierea fiecăruia
 \item \textbf{COUNTRY}:
         \begin{m_itemize}
                 \item \emph{id}: \nump care reprezintă id-ul țării;
-                \item \emph{name}: \str\footnote{Toate atributele de tip \emph{șir de caractere} vor avea lungimea maximă egală cu 50.} care reprezintă numele țării.
+                \item \emph{name}: \str\footnote{Toate atributele de tip
+                      \emph{șir de caractere} vor avea lungimea maximă egală
+                      cu 50.} care reprezintă numele țării.
         \end{m_itemize}
 
 \item \textbf{LOCATION}:
@@ -429,7 +432,9 @@ Printr-o operație de \emph{join} între cele două tabele obținute, se accesea
 
 \subsection{FN2}
 
-Se ia ca exemplu de \textbf{non-FN2} tabela \textbf{GROUP\_MEMBER\_0} care face legătura dintre grupuri și membrii componenți ai acestora. Un grup poate avea mai mulți membri iar un artist poate face parte din mai multe grupuri.
+Se ia ca exemplu de \textbf{non-FN2} tabela \textbf{GROUP\_MEMBER\_0} care face
+legătura dintre grupuri și membrii componenți ai acestora. Un grup poate avea
+mai mulți membri iar un artist poate face parte din mai multe grupuri.
 
 % inainte de normalizare
 
@@ -487,8 +492,9 @@ cu scopul eliminării dependenței parțiale; tabelele rezultate respectă propr
 Se ia ca exemplu de \textbf{non-FN3} tabela \textbf{SUBSCRIPTION\_0} care
 realizează legătura dintre un client, categoria la care este sau a fost
 abonat\footnote{Pe parcursul rezolvării cerințelor se folosește și formularea
-\emph{„client este abonat la categorie”}. A se înțelege tot drept \emph{„client
-este \textbf{sau a fost} abonat la categorie”}.}, și angajatul prin intermediul
+\emph{„client \textbf{este} abonat la categorie”}. Acolo unde nu se precizează dacă
+abonamentul este activ sau expirat, a se înțelege sensul formulării tot drept \emph{„client este
+\textbf{sau a fost} abonat la categorie”}.}, și angajatul prin intermediul
 căruia s-a realizat abonamentul. O înregistrare de tip abonament aparține unui
 singur client. Un client poate avea mai multe abonamente asociate; o categorie
 poate avea mai multe abonamente asociate; un angajat poate crea mai multe
@@ -511,7 +517,7 @@ abonamente.
 \end{table}
 
 Se observă că atributele care nu participă la cheia primară sunt dependente de
-\emph{întregimea} cheii primare, deci structura respecă proprietățile \textbf{FN2}.
+\emph{întregimea} cheii primare, deci structura respectă proprietățile \textbf{FN2}.
 Totuși, atributul \textbf{employee\_first\_name} este dependent în mod
 \emph{tranzitiv} de cheia primară.
 
@@ -634,16 +640,20 @@ Se consideră ca exemplu \textbf{non-BCNF} relația:
         \item \textbf{TRANSACTION\_0 (copy\_id\#, customer\_email\#, customer\_id)}
 \end{m_itemize}
 
-Relația face legătura dintre un client și copiile pe care acesta le-a cumpărat. O copie poate fi cumpărată de un singur client, iar un client poate cumpăra oricâte copii. Clienții au email-uri unice.
+Relația face legătura dintre un client și copiile pe care acesta le-a cumpărat.
+O copie poate fi cumpărată de un singur client, iar un client poate cumpăra
+oricâte copii. Clienții au email-uri unice.
 
-Astfel, se observă dependențele:
+Astfel, se observă dependențele funcționale:
 
 \begin{m_itemize}
-\item \{copy\_id\#, customer\_email\#\} $\rightarrow$ \{customer\_id\};
-\item \{customer\_id\} $\rightarrow$ \{customer\_email\#\}.
+        \item \{copy\_id\#, customer\_email\#\} $\rightarrow$ \{customer\_id\};
+        \item \{customer\_id\} $\rightarrow$ \{customer\_email\#\}.
 \end{m_itemize}
 
-Deoarece \textbf{customer\_id} nu este o cheie candidat, relația trebuie împărțită în următoarele două componente pentru a respecta proprietățile \textbf{FN4}:
+Deoarece \textbf{customer\_id} nu este o cheie candidat, relația trebuie
+împărțită în următoarele două componente pentru a respecta proprietățile
+\textbf{FN4}:
 
 \begin{m_itemize}
         \item \textbf{TRANSACTION\_1 (customer\_id\#, customer\_email)}
@@ -665,11 +675,13 @@ Se consideră ca exemplu \textbf{non-FN4} relația următoare:
 Astfel, se observă multidependențele:
 
 \begin{m_itemize}
-\item \{album\_id\#\} $\rightarrow\rightarrow$ \{track\_id\};
-\item \{album\_id\#\} $\rightarrow\rightarrow$ \{copy\_id\}.
+        \item \{album\_id\#\} $\rightarrow\rightarrow$ \{track\_id\};
+        \item \{album\_id\#\} $\rightarrow\rightarrow$ \{copy\_id\}.
 \end{m_itemize}
 
-Relația este în \textbf{BCNF}, însă este nevoie de eliminarea multidependențelor de mai sus pentru respectarea proprietăților \textbf{FN4}; așadar, avem următoarea descompunere:
+Relația este în \textbf{BCNF}, însă este nevoie de eliminarea
+multidependențelor de mai sus pentru respectarea proprietăților \textbf{FN4};
+așadar, avem următoarea descompunere:
 
 \begin{m_itemize}
         \item \textbf{TRANSACTION\_1 (customer\_id\#, customer\_email)}
@@ -678,7 +690,9 @@ Relația este în \textbf{BCNF}, însă este nevoie de eliminarea multidependen�
 
 \subsubsection{\textbf{FN5}}
 
-Pentru exemplul de \textbf{non-FN5} pornim de la o relație de tip 3 \emph{aciclică} și care se află în \textbf{FN5}. O astfel de relație este detaliată în secțiunea \ref{descrel}:
+Pentru exemplul de \textbf{non-FN5} pornim de la o relație de tip 3
+\emph{aciclică} și care se află în \textbf{FN5}. O astfel de relație este
+detaliată în secțiunea \ref{descrel}:
 
 \begin{itemize}[label=\textbullet, noitemsep, topsep=0pt, after=]
 
@@ -712,9 +726,13 @@ descrierea:
 \begin{itemize}[label=\textbullet, noitemsep, topsep=0pt, after=]
         \item \textbf{CUSTOMER} \emph{se abonează la} \textbf{CATEGORY};
               \textbf{CUSTOMER} \emph{are abonamente făcute de} \textbf{EMPLOYEE};
-              \textbf{EMPLOYEE} poate face abonamente clientilor pentru categoria \textbf{CATEGORY}
+              \textbf{EMPLOYEE} \emph{poate face abonamente pe categoria} \textbf{CATEGORY}
         \begin{m_itemize}
-                \item Realizează trei legături independente: identifică categoriile la care un client este abonat, identifică angajații care i-au făcut cel puțin un abonament clientului, identifică angajații care pot face abonamente pentru o anumită categorie.
+                \item Realizează trei legături independente: identifică
+                      categoriile la care un client este abonat, identifică
+                      angajații care i-au făcut cel puțin un abonament
+                      clientului, identifică angajații care pot face
+                      abonamente pentru o anumită categorie.
                 \item Are cardinalitatea \texttt{M(0):M(0):M(0)}.
         \end{m_itemize}
 
