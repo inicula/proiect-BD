@@ -11,3 +11,4 @@ draft/tex/*.fls
 draft/tex/*.log
 draft/tex/*.pdf
 draft/tex/*.out
+draft/tex/*.toc

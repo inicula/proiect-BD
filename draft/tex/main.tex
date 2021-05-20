@@ -16,6 +16,8 @@
 \usepackage[scaled=0.9]{DejaVuSansMono}
 \usepackage[stable]{footmisc}
 \usepackage{xspace}
+\usepackage{caption}
+\usepackage{float}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -68,6 +70,13 @@
 \newcommand{\idt}{\emph{identifier}\xspace}
 \newcommand{\datet}{\emph{dată calendaristică}\xspace}
 \newcommand{\nnull}{\emph{not null}\xspace}
+
+\usepackage{array}
+\newcolumntype{$}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{^}{>{\currentrowstyle}}
+\newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
+  #1\ignorespaces
+}
 
 \title{Management-ul unui magazin de muzică}
 \author{Nicula Ionuț-Cosmin \\ \emph{mail: }\texttt{ionut.nicula@s.unibuc.ro} \\\hspace{35pt}\texttt{niculaionut@tutanota.com}
@@ -236,7 +245,7 @@ Numele entităților, împreună cu numele atributelor și descrierea fiecăruia
         \begin{m_itemize}
                 \item \emph{id}: variabilă de tip \idt\footnote{Deoarece toate atributele
                       de tip \emph{id} vor avea aceeași reprezentare în baza de date,
-                      tipul \emph{identifier} se consideră o notație pentru \emph{număr natural
+                      tipul \idt se va folosi cu sensul de \emph{număr natural
                       de maxim 3 cifre}. De asemenea, toate atributele de acest
                       tip au constrângerea \nnull} care reprezintă id-ul țării;
                 \item \emph{name}: variabilă de tip \emph{șir de caractere}\footnote{Toate atributele de tip \emph{șir de caractere} vor avea lungimea maximă egală cu 50.} care reprezintă numele țării.
@@ -319,6 +328,197 @@ Numele entităților, împreună cu numele atributelor și descrierea fiecăruia
 
 \section{Normalizarea până la forma normală 3}
 
+\subsection{FN1}
+
+Se ia ca exemplu de \textbf{non-FN1} tabela \textbf{ALBUMS\_0}, având următoarele atribute și înregistrări:
+
+% inainte de normalizare
+
+\begin{table}[h]
+\centering
+\caption*{Tabela \textbf{ALBUMS\_0}:}
+\begin{tabular}{$c^c^c^c}
+        \hline
+        \rowstyle{\bfseries}
+        id\# & group\_id & title & tracks \\
+        \hline
+        1 & 1 & Animals & Pigs, Dogs, Sheep \\
+        \hline
+        2 & 2 & Goldberg Variations (Excerpts) & Aria, Variation 1, Variation 2, Variation 16\\
+        \hline
+\end{tabular}
+\end{table}
+
+Deoarece \textbf{FN1} nu admite atribute cu valori non-atomice,
+\textbf{ALBUMS\_0} se împarte în două tabele.
+
+\textbf{ALBUMS\_1} conține
+toate atributele din \textbf{ALBUMS\_0} cu excepția celui cu valori multiple,
+iar \textbf{ALBUMS\_2} conține câte o înregistrare separată pentru fiecare
+track asociat albumului aferent.
+
+Printr-o operație de \emph{join} între cele două tabele obținute, se accesează
+(fără pierderi de informație) toate track-urile din componența unui album.
+
+% dupa normalizare
+
+
+\begin{table}[h]
+\centering
+\caption*{Tabela \textbf{ALBUMS\_1}:}
+\begin{tabular}{$c^c^c}
+        \hline
+        \rowstyle{\bfseries}
+        id\# & group\_id & title \\
+        \hline
+        1 & 1 & Animals \\
+        \hline
+        2 & 2 & Goldberg Variations (Excerpts) \\
+        \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption*{Tabela \textbf{ALBUMS\_2}:}
+\begin{tabular}{$c^c}
+        \hline
+        \rowstyle{\bfseries}
+        id\# & track \\
+        \hline
+        1 & Pigs \\
+        \hline
+        1 & Dogs \\
+        \hline
+        1 & Sheep \\
+        \hline
+        2 & Aria \\
+        \hline
+        2 & Variation 1 \\
+        \hline
+        2 & Variation 2 \\
+        \hline
+        2 & Variation 16 \\
+        \hline
+\end{tabular}
+\end{table}
+
+\subsection{FN2}
+
+Se ia ca exemplu de \textbf{non-FN2} tabela \textbf{GROUP\_MEMBER\_0} care face legătura dintre grupuri și membrii componenți ai acestora.
+
+% inainte de normalizare
+
+\begin{table}[H]
+\centering
+\caption*{Tabela \textbf{GROUP\_MEMBER\_0}:}
+\begin{tabular}{$c^c^c^c}
+        \hline
+        \rowstyle{\bfseries}
+        group\_id\# & member\_id\# & left\_group\_date & first\_name \\
+        \hline
+        1 & 1 & null & Nick \\
+        \hline
+        1 & 2 & null & David \\
+        \hline
+\end{tabular}
+\end{table}
+
+Deoarece valorile \textbf{first\_name} depind doar de al doilea component
+(\textbf{member\_id\#}) al cheii primare, tabela inițială se împarte în două alte tabele,
+cu scopul eliminării dependenței parțiale; tabelele rezultate respectă proprietățile \textbf{FN2}.
+
+\begin{table}[H]
+\centering
+\caption*{Tabela \textbf{GROUP\_MEMBER\_1}:}
+\begin{tabular}{$c^c^c}
+        \hline
+        \rowstyle{\bfseries}
+        group\_id\# & member\_id\# & left\_group\_date \\
+        \hline
+        1 & 1 & null \\
+        \hline
+        1 & 2 & null \\
+        \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption*{Tabela \textbf{GROUP\_MEMBER\_2}:}
+\begin{tabular}{$c^c}
+        \hline
+        \rowstyle{\bfseries}
+        member\_id\# & first\_name \\
+        \hline
+        1 & Nick \\
+        \hline
+        2 & David \\
+        \hline
+\end{tabular}
+\end{table}
+
+\subsection{FN3}
+
+Se ia ca exemplu de \textbf{non-FN3} tabela \textbf{SUBSCRIPTION\_0} care
+realizează legătura dintre un client, categoria la care este sau a fost abonat,
+și angajatul prin intermediul căruia s-a realizat abonamentul.
+
+
+\begin{table}[H]
+\centering
+\caption*{Tabela \textbf{SUBSCRIPTION\_0}:}
+\begin{tabular}{$c^c^c^c^c}
+        \hline
+        \rowstyle{\bfseries}
+        customer\_id\# & category\_id\# & employee\_id & expiry\_date\# & employee\_first\_name \\
+        \hline
+        1 & 10 & 5 & 19/03/2020 & Tracy\\
+        \hline
+        2 & 10 & 3 & 02/01/2019 & John\\
+        \hline
+\end{tabular}
+\end{table}
+
+Se observă că atributele care nu participă la cheia primară sunt dependente de
+\emph{întregimea} cheii primare, deci structura respecă proprietățile \textbf{FN2}.
+Totuși, atributul \textbf{employee\_first\_name} este dependent în mod
+\emph{tranzitiv} de cheia primară.
+
+Pentru a elimina dependența tranzitivă, tabela se împarte în următoarele două
+componente al căror \emph{join} păstrează accesul la aceleași informații din
+tabela inițială:
+
+\begin{table}[H]
+\centering
+\caption*{Tabela \textbf{SUBSCRIPTION\_1}:}
+\begin{tabular}{$c^c^c^c^c}
+        \hline
+        \rowstyle{\bfseries}
+        customer\_id\# & category\_id\# & employee\_id & expiry\_date\# \\
+        \hline
+        1 & 10 & 5 & 19/03/2020 \\
+        \hline
+        2 & 10 & 3 & 02/01/2019 \\
+        \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption*{Tabela \textbf{SUBSCRIPTION\_2}:}
+\begin{tabular}{$c^c}
+        \hline
+        \rowstyle{\bfseries}
+        employee\_id\# & employee\_first\_name \\
+        \hline
+        5 & Tracy \\
+        \hline
+        3 & John \\
+        \hline
+\end{tabular}
+\end{table}
+
 \section{Crearea tabelelor și inserarea de date coerente}
 
 screenshots go here
@@ -367,7 +567,8 @@ caractere]{../../queries/3.sql}
 
 \section{Crearea unei secvențe utilizate în inserarea unor înregistrari în tabele}
 
-Secvența următoare este folosită la introducerea datelor în tabela \texttt{Artists}. Generează un ID unic pentru fiecare înregistrare.
+Secvența următoare este folosită la introducerea datelor în tabela
+\texttt{Artists}. Generează un ID unic pentru fiecare înregistrare.
 
 \begin{center}
 
