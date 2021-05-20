@@ -637,27 +637,27 @@ Secvența următoare este folosită la introducerea datelor în tabela
 Se consideră ca exemplu \textbf{non-BCNF} relația:
 
 \begin{m_itemize}
-        \item \textbf{TRANSACTION\_0 (copy\_id\#, customer\_email\#, customer\_id)}
+        \item \textbf{FREQUENT\_0 (category\_id\#, customer\_email\#, customer\_id)}
 \end{m_itemize}
 
-Relația face legătura dintre un client și copiile pe care acesta le-a cumpărat.
-O copie poate fi cumpărată de un singur client, iar un client poate cumpăra
-oricâte copii. Clienții au email-uri unice.
+Relația face legătura dintre un client și categoriile pe care le frecventează des (pe site-ul magazinului).
+O categorie poate fi frecventată de mai mulți clienți, iar un client poate
+frecventa mai multe categorii. Clienții au email-uri și id-uri unice.
 
 Astfel, se observă dependențele funcționale:
 
 \begin{m_itemize}
-        \item \{copy\_id\#, customer\_email\#\} $\rightarrow$ \{customer\_id\};
+        \item \{category\_id\#, customer\_email\#\} $\rightarrow$ \{customer\_id\};
         \item \{customer\_id\} $\rightarrow$ \{customer\_email\#\}.
 \end{m_itemize}
 
 Deoarece \textbf{customer\_id} nu este o cheie candidat, relația trebuie
 împărțită în următoarele două componente pentru a respecta proprietățile
-\textbf{FN4}:
+\textbf{BCNF}:
 
 \begin{m_itemize}
-        \item \textbf{TRANSACTION\_1 (customer\_id\#, customer\_email)}
-        \item \textbf{TRANSACTION\_2 (copy\_id\#, customer\_id\#)}
+        \item \textbf{FREQUENT\_1 (customer\_id\#, customer\_email)}
+        \item \textbf{FREQUENT\_2 (category\_id\#, customer\_id\#)}
 \end{m_itemize}
 
 \subsubsection{\textbf{FN4}}
@@ -665,8 +665,8 @@ Deoarece \textbf{customer\_id} nu este o cheie candidat, relația trebuie
 Se consideră ca exemplu \textbf{non-FN4} relația următoare:
 
 \begin{m_itemize}[after=]
-        \item \textbf{TRAKCS\_COPIES\_0 (album\_id\#, track\_id\#, copy\_id\#)};
-        \item \textbf{Un album poate avea oricâte track-uri și oricâte copii fizice}.
+        \item \textbf{GROUP\_INFO\_0 (group\_id\#, manager\_id\#, artist\_id\#)};
+        \item \textbf{Un grup poate avea mai mulți impresari și mai mulți artiști în componența sa. Artiștii și impresarii, la rândul lor, pot avea mai multe grupuri asociate}.
 \end{m_itemize}
 
 
@@ -675,8 +675,8 @@ Se consideră ca exemplu \textbf{non-FN4} relația următoare:
 Astfel, se observă multidependențele:
 
 \begin{m_itemize}
-        \item \{album\_id\#\} $\rightarrow\rightarrow$ \{track\_id\};
-        \item \{album\_id\#\} $\rightarrow\rightarrow$ \{copy\_id\}.
+        \item \{group\_id\#\} $\rightarrow\rightarrow$ \{manager\_id\};
+        \item \{group\_id\#\} $\rightarrow\rightarrow$ \{artist\_id\}.
 \end{m_itemize}
 
 Relația este în \textbf{BCNF}, însă este nevoie de eliminarea
@@ -684,8 +684,8 @@ multidependențelor de mai sus pentru respectarea proprietăților \textbf{FN4};
 așadar, avem următoarea descompunere:
 
 \begin{m_itemize}
-        \item \textbf{TRANSACTION\_1 (customer\_id\#, customer\_email)}
-        \item \textbf{TRANSACTION\_2 (copy\_id\#, customer\_id\#)}
+        \item \textbf{GROUP\_INFO\_1 (group\_id\#, manager\_id\#)}
+        \item \textbf{GROUP\_INFO\_2 (group\_id\#, artist\_id\#)}
 \end{m_itemize}
 
 \subsubsection{\textbf{FN5}}
