@@ -1,26 +1,26 @@
 create table countries(
         id   number(3) not null primary key,
-        name varchar(50)
+        name varchar(50) not null
 );
 
 create table locations(
         id         number(3) not null primary key,
-        city       varchar(50),
-        country_id number(3) references countries(id)
+        city       varchar(50) not null,
+        country_id number(3) not null references countries(id)
 );
 
 create table artists(
         id                number(3) not null primary key,
-        first_name        varchar(50),
-        last_name         varchar(50),
-        date_birth        date,
+        first_name        varchar(50) not null,
+        last_name         varchar(50) not null,
+        date_birth        date not null,
         date_death        date,
-        birth_location_id number(3) references Locations(id)
+        birth_location_id number(3) not null references Locations(id)
 );
 
 create table groups(
         id   number(3) not null primary key,
-        name varchar(30)
+        name varchar(30) not null
 );
 
 create table group_members(
@@ -32,53 +32,53 @@ create table group_members(
 
 create table categories(
         id    number(3) not null primary key,
-        title varchar(50)
+        title varchar(50) not null
 );
 
 create table albums(
         id           number(3) not null primary key,
-        title        varchar(50),
-        release_date date,
-        category_id  number(3) references Categories(id),
-        group_id     number(3) references Groups(id)
+        title        varchar(50) not null,
+        release_date date not null,
+        category_id  number(3) not null references Categories(id),
+        group_id     number(3) not null references Groups(id)
 );
 
 create table tracks(
         album_id number(3) not null references Albums(id),
         id       number(3) not null,
-        title    varchar(50),
-        length   number(5),
+        title    varchar(50) not null,
+        length   number(5) not null,
         primary key(album_id, id)
 );
 
 create table jobs(
         id         number(3) not null primary key,
-        title      varchar(50),
+        title      varchar(50) not null,
         min_salary number(5) not null,
         max_salary number(5) not null
 );
 
 create table employees(
         id         number(3) not null primary key,
-        first_name varchar(50),
-        last_name  varchar(50),
+        first_name varchar(50) not null,
+        last_name  varchar(50) not null,
         salary     number(5) not null,
         hire_date  date not null,
-        job_id     number(3) references Jobs(id)
+        job_id     number(3) not null references Jobs(id)
 );
 
 create table customers(
         id         number(3) not null primary key,
-        first_name varchar(50),
-        last_name  varchar(50),
-        email      varchar(50)
+        first_name varchar(50) not null,
+        last_name  varchar(50) not null,
+        email      varchar(50) not null
 );
 
 create table copies(
         album_id      number(3) not null references Albums(id),
         id            number(3) not null,
-        serial_number varchar(8),
-        price         number(5),
+        serial_number varchar(8) not null unique,
+        price         number(5) not null,
         customer_id   number(3) references Customers(id),
         primary key   (album_id, id)
 );

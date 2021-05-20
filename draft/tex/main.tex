@@ -18,6 +18,9 @@
 \usepackage{xspace}
 \usepackage{caption}
 \usepackage{float}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{transparent}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -66,16 +69,22 @@
 \newlist{m_itemize}{itemize}{1}
 \setlist[m_itemize]{label=\textbullet, noitemsep, topsep=0pt, after=\vspace{.4\baselineskip}}
 
-\newcommand{\str}{\emph{șir de caractere}\xspace}
-\newcommand{\idt}{\emph{identifier}\xspace}
-\newcommand{\datet}{\emph{dată calendaristică}\xspace}
-\newcommand{\nnull}{\emph{not null}\xspace}
+\newcommand{\str}{variabilă de tip \emph{șir de caractere}\xspace}
+\newcommand{\nump}{variabilă de tip \emph{număr natural de maxim 3 cifre}\xspace}
+\newcommand{\numpp}{variabilă de tip \emph{număr natural de maxim 5 cifre}\xspace}
+\newcommand{\datet}{variabilă de tip \emph{dată calendaristică}\xspace}
+\newcommand{\nnull}{variabilă de tip \emph{not null}\xspace}
 
 \usepackage{array}
 \newcolumntype{$}{>{\global\let\currentrowstyle\relax}}
 \newcolumntype{^}{>{\currentrowstyle}}
 \newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
   #1\ignorespaces
+}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./../../img/}{#1.pdf_tex}
 }
 
 \title{Management-ul unui magazin de muzică}
@@ -169,6 +178,7 @@ Fiecare entitate dintre toate celelalte are în componență un atribut \texttt{
 
 
 \section{Descrierea relațiilor}
+\label{descrel}
 
 \begin{enumerate}[noitemsep, label=\roman*.]
 
@@ -243,69 +253,83 @@ Numele entităților, împreună cu numele atributelor și descrierea fiecăruia
 
 \item \textbf{COUNTRY}:
         \begin{m_itemize}
-                \item \emph{id}: variabilă de tip \idt\footnote{Deoarece toate atributele
-                      de tip \emph{id} vor avea aceeași reprezentare în baza de date,
-                      tipul \idt se va folosi cu sensul de \emph{număr natural
-                      de maxim 3 cifre}. De asemenea, toate atributele de acest
-                      tip au constrângerea \nnull} care reprezintă id-ul țării;
-                \item \emph{name}: variabilă de tip \emph{șir de caractere}\footnote{Toate atributele de tip \emph{șir de caractere} vor avea lungimea maximă egală cu 50.} care reprezintă numele țării.
+                \item \emph{id}: \nump care reprezintă id-ul țării;
+                \item \emph{name}: \str\footnote{Toate atributele de tip \emph{șir de caractere} vor avea lungimea maximă egală cu 50.} care reprezintă numele țării.
         \end{m_itemize}
 
 \item \textbf{LOCATION}:
         \begin{m_itemize}
-                \item \emph{id}: variabilă de tip \idt  care reprezintă id-ul locației;
-                \item \emph{city}: variabilă de tip \str care reprezintă numele orașului locației.
+                \item \emph{id}: \nump  care reprezintă id-ul locației;
+                \item \emph{city}: \str care reprezintă numele orașului locației.
         \end{m_itemize}
 
 \item \textbf{ARTIST}:
         \begin{m_itemize}
-                \item \emph{id}: variabilă de tip \idt care reprezintă id-ul artistului;
-                \item \emph{first\_name}: variabilă de tip \str care reprezintă prenumele artistului;
-                \item \emph{last\_name}: variabilă de tip \str care reprezintă numele artistului;
-                \item \emph{date\_birth}: variabilă de tip \datet care reprezintă data nașterii artistului;
-                \item \emph{date\_birth}: variabilă de tip \datet care reprezintă data decesului artistului.
+                \item \emph{id}: \nump care reprezintă id-ul artistului;
+                \item \emph{first\_name}: \str care reprezintă prenumele artistului;
+                \item \emph{last\_name}: \str care reprezintă numele artistului;
+                \item \emph{date\_birth}: \datet care reprezintă data nașterii artistului;
+                \item \emph{date\_birth}: \datet care reprezintă data decesului artistului.
         \end{m_itemize}
 
 \item \textbf{GROUP}:
         \begin{m_itemize}
-                \item
+                \item \emph{id}: \nump care reprezintă id-ul grupului;
+                \item \emph{name}: \str care reprezintă numele grupului.
         \end{m_itemize}
 
 \item \textbf{ALBUM}:
         \begin{m_itemize}
-                \item
+                \item \emph{id}: \nump care reprezintă id-ul albumului;
+                \item \emph{title}: \str care reprezintă numele albumului;
+                \item \emph{release\_date}: \datet care reprezintă data la care s-a lansat albumul.
         \end{m_itemize}
 
 \item \textbf{TRACK}:
         \begin{m_itemize}
-                \item
+                \item \emph{album\_id}: \nump care reprezintă id-ul albumului din care face parte track-ul;
+                \item \emph{id}: \nump care reprezintă id-ul track-ului;
+                \item \emph{title}: \str care reprezintă titlul track-ului;
+                \item \emph{length}: \numpp care reprezintă durata în minute a track-ului.
         \end{m_itemize}
 
 \item \textbf{CATEGORY}:
         \begin{m_itemize}
-                \item
+                \item \emph{id}: \nump care reprezintă id-ul categoriei;
+                \item \emph{title}: \str care reprezintă titlul categoriei.
         \end{m_itemize}
 
 \item \textbf{COPY}:
         \begin{m_itemize}
-                \item
+                \item \emph{album\_id}: \nump care reprezintă id-ul albumului copiei fizice;
+                \item \emph{id}: \nump care reprezintă id-ul copiei;
+                \item \emph{serial\_number}: \str care reprezintă numărul de serie (unic) al copiei;
+                \item \emph{price}: \numpp care reprezintă prețul copiei.
         \end{m_itemize}
 
 \item \textbf{CUSTOMER}:
         \begin{m_itemize}
-                \item
-                \item
+                \item \emph{id}: \nump care reprezintă id-ul clientului;
+                \item \emph{first\_name}: \str care reprezintă prenumele clientului;
+                \item \emph{last\_name}: \str care reprezintă numele clientului;
+                \item \emph{email}: \str care reprezintă email-ul clientului.
         \end{m_itemize}
 
 \item \textbf{EMPLOYEE}:
         \begin{m_itemize}
-                \item
-                \item
+                \item \emph{id}: \nump care reprezintă id-ul angajatului;
+                \item \emph{first\_name}: \str care reprezintă prenumele angajatului;
+                \item \emph{last\_name}: \str care reprezintă numele angajatului;
+                \item \emph{salary}: \numpp care reprezintă salariul angajatului;
+                \item \emph{hire\_date}: \datet care reprezintă data angajării angajatului.
         \end{m_itemize}
 
 \item \textbf{JOB}:
         \begin{m_itemize}
-                \item
+                \item \emph{id}: \nump care reprezintă id-ul job-ului;
+                \item \emph{title}: \str care reprezintă titlul job-ului;
+                \item \emph{min\_salary}: \numpp care reprezintă salariul minim al job-ului;
+                \item \emph{max\_salary}: \numpp care reprezintă salariul maxim job-ului.
         \end{m_itemize}
 
 \end{enumerate}
@@ -355,10 +379,10 @@ Deoarece \textbf{FN1} nu admite atribute cu valori non-atomice,
 \textbf{ALBUMS\_1} conține
 toate atributele din \textbf{ALBUMS\_0} cu excepția celui cu valori multiple,
 iar \textbf{ALBUMS\_2} conține câte o înregistrare separată pentru fiecare
-track asociat albumului aferent.
+track asociat albumului.
 
 Printr-o operație de \emph{join} între cele două tabele obținute, se accesează
-(fără pierderi de informație) toate track-urile din componența unui album.
+(fără pierdere de informație) toate track-urile din componența unui album.
 
 % dupa normalizare
 
@@ -405,7 +429,7 @@ Printr-o operație de \emph{join} între cele două tabele obținute, se accesea
 
 \subsection{FN2}
 
-Se ia ca exemplu de \textbf{non-FN2} tabela \textbf{GROUP\_MEMBER\_0} care face legătura dintre grupuri și membrii componenți ai acestora.
+Se ia ca exemplu de \textbf{non-FN2} tabela \textbf{GROUP\_MEMBER\_0} care face legătura dintre grupuri și membrii componenți ai acestora. Un grup poate avea mai mulți membri iar un artist poate face parte din mai multe grupuri.
 
 % inainte de normalizare
 
@@ -461,8 +485,14 @@ cu scopul eliminării dependenței parțiale; tabelele rezultate respectă propr
 \subsection{FN3}
 
 Se ia ca exemplu de \textbf{non-FN3} tabela \textbf{SUBSCRIPTION\_0} care
-realizează legătura dintre un client, categoria la care este sau a fost abonat,
-și angajatul prin intermediul căruia s-a realizat abonamentul.
+realizează legătura dintre un client, categoria la care este sau a fost
+abonat\footnote{Pe parcursul rezolvării cerințelor se folosește și formularea
+\emph{„client este abonat la categorie”}. A se înțelege tot drept \emph{„client
+este \textbf{sau a fost} abonat la categorie”}.}, și angajatul prin intermediul
+căruia s-a realizat abonamentul. O înregistrare de tip abonament aparține unui
+singur client. Un client poate avea mai multe abonamente asociate; o categorie
+poate avea mai multe abonamente asociate; un angajat poate crea mai multe
+abonamente.
 
 
 \begin{table}[H]
@@ -582,7 +612,125 @@ Secvența următoare este folosită la introducerea datelor în tabela
 
 \end{center}
 
-\section{Cerința}
-\section{Cerința}
+\section{Cereri cu operații \emph{outer-join} și \emph{division}}
+
+\begin{center}
+
+\minipage{\linewidth}
+\lstinputlisting[caption=Cerere cu operație \emph{outer-join}]{../../queries/21.sql}
+\endminipage
+
+\end{center}
+
+\section{Realizarea normalizării la formele superioare, aplicarea denormalizării}
+
+\subsection{Normalizarea la \textbf{BCNF}, \textbf{FN4}, \textbf{FN5}}
+
+\subsubsection{\textbf{BCNF}}
+
+Se consideră ca exemplu \textbf{non-BCNF} relația:
+
+\begin{m_itemize}
+        \item \textbf{TRANSACTION\_0 (copy\_id\#, customer\_email\#, customer\_id)}
+\end{m_itemize}
+
+Relația face legătura dintre un client și copiile pe care acesta le-a cumpărat. O copie poate fi cumpărată de un singur client, iar un client poate cumpăra oricâte copii. Clienții au email-uri unice.
+
+Astfel, se observă dependențele:
+
+\begin{m_itemize}
+\item \{copy\_id\#, customer\_email\#\} $\rightarrow$ \{customer\_id\};
+\item \{customer\_id\} $\rightarrow$ \{customer\_email\#\}.
+\end{m_itemize}
+
+Deoarece \textbf{customer\_id} nu este o cheie candidat, relația trebuie împărțită în următoarele două componente pentru a respecta proprietățile \textbf{FN4}:
+
+\begin{m_itemize}
+        \item \textbf{TRANSACTION\_1 (customer\_id\#, customer\_email)}
+        \item \textbf{TRANSACTION\_2 (copy\_id\#, customer\_id\#)}
+\end{m_itemize}
+
+\subsubsection{\textbf{FN4}}
+
+Se consideră ca exemplu \textbf{non-FN4} relația următoare:
+
+\begin{m_itemize}[after=]
+        \item \textbf{TRAKCS\_COPIES\_0 (album\_id\#, track\_id\#, copy\_id\#)};
+        \item \textbf{Un album poate avea oricâte track-uri și oricâte copii fizice}.
+\end{m_itemize}
+
+
+\medskip
+
+Astfel, se observă multidependențele:
+
+\begin{m_itemize}
+\item \{album\_id\#\} $\rightarrow\rightarrow$ \{track\_id\};
+\item \{album\_id\#\} $\rightarrow\rightarrow$ \{copy\_id\}.
+\end{m_itemize}
+
+Relația este în \textbf{BCNF}, însă este nevoie de eliminarea multidependențelor de mai sus pentru respectarea proprietăților \textbf{FN4}; așadar, avem următoarea descompunere:
+
+\begin{m_itemize}
+        \item \textbf{TRANSACTION\_1 (customer\_id\#, customer\_email)}
+        \item \textbf{TRANSACTION\_2 (copy\_id\#, customer\_id\#)}
+\end{m_itemize}
+
+\subsubsection{\textbf{FN5}}
+
+Pentru exemplul de \textbf{non-FN5} pornim de la o relație de tip 3 \emph{aciclică} și care se află în \textbf{FN5}. O astfel de relație este detaliată în secțiunea \ref{descrel}:
+
+\begin{itemize}[label=\textbullet, noitemsep, topsep=0pt, after=]
+
+\item \textbf{CUSTOMER} \emph{se abonează la} \textbf{CATEGORY} \emph{prin intermediul} \textbf{EMPLOYEE}:
+        \begin{m_itemize}
+                \item Realizează legătura dintre client, categorie și angajat;
+                \item Reprezintă un abonament prin prisma căruia se pot trimite clientului oferte, reduceri, etc;
+                \item Are cardinalitatea \texttt{M(0):M(0):M(0)}.
+        \end{m_itemize}
+
+\end{itemize}
+
+Pentru fiecare înregistrare de tip \textbf{SUBSCRIPTION} (din diagrama
+conceptuală), structura relației este potrivită pentru query-uri de tipul
+\emph{Pentru abonamentul X din tabela Subscriptions, să se afișeze clientul
+care deține abonamentul / categoria pe care abonamentul este făcut / angajatul
+prin intermediul căruia s-a făcut abonamentul}. Astfel, dacă relația s-ar
+împărți în trei relații diferite (de la \textbf{CUSTOMER} la \textbf{CATEGORY}
+și \textbf{EMPLOYEE}, și de la \textbf{EMPLOYEE} la \textbf{CATEGORY}), s-ar
+ști, spre exemplu, că un client $\alpha$ este abonat la o mulțime de categorii
+$\beta$, și că abonamentele sale au fost făcute de angajați dintr-o mulțime $\gamma$,
+însă nu s-ar putea răspunde la query-ul \emph{Pentru fiecare categorie la care
+clientul $\alpha$ este abonat, să se afișeze informații despre angajatul care
+i-a făcut acel abonament.}
+
+Așadar, considerăm următoarea relație de tip 3 \emph{ciclică}\footnote{i.e. o
+relație care \emph{poate} fi descompusă în trei relații diferite \emph{fără
+pierdere de informație} (spre deosebire de relația menționată anterior).} având
+descrierea:
+
+\begin{itemize}[label=\textbullet, noitemsep, topsep=0pt, after=]
+        \item \textbf{CUSTOMER} \emph{se abonează la} \textbf{CATEGORY};
+              \textbf{CUSTOMER} \emph{are abonamente făcute de} \textbf{EMPLOYEE};
+              \textbf{EMPLOYEE} poate face abonamente clientilor pentru categoria \textbf{CATEGORY}
+        \begin{m_itemize}
+                \item Realizează trei legături independente: identifică categoriile la care un client este abonat, identifică angajații care i-au făcut cel puțin un abonament clientului, identifică angajații care pot face abonamente pentru o anumită categorie.
+                \item Are cardinalitatea \texttt{M(0):M(0):M(0)}.
+        \end{m_itemize}
+
+\end{itemize}
+
+Pentru a normaliza tabela la \textbf{FN5}, relația ciclică de tip 3 se
+descompune în trei relații de tip 2. Presupunând că numele relației descrise
+anterior este \textbf{ATTACHED\_TO}, normalizarea se face în felul următor:
+
+\begin{figure}[H]
+    \centering
+    \incfig{fn5_example}
+    \caption{Normalizarea la \textbf{FN5}}
+    \label{fig:norm5}
+\end{figure}
+
+\subsection{Denormalizarea}
 
 \end{document}
