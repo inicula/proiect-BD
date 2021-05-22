@@ -7,11 +7,12 @@
 \usepackage{xcolor}
 \usepackage[margin=0.5in]{geometry}
 \usepackage{textcomp}
-\usepackage{mathptmx}
 \usepackage{color}
 \usepackage{pdflscape}
 \usepackage[hidelinks]{hyperref}
 \usepackage{enumitem}
+\usepackage{libertine}
+\usepackage{libertinust1math}
 \usepackage[T1]{fontenc}
 \usepackage[scaled=0.9]{DejaVuSansMono}
 \usepackage[stable]{footmisc}
@@ -118,7 +119,9 @@ nașterii, locul nașterii.
 Pe job-urile din cadrul magazinului lucrează o serie de angajați. Anumiți
 angajați pot face abonamente clienților.
 
-Clienții pot cumpăra copii ale albumelor și se pot abona la categoriile afișate pe site-ul magazinului, cu scopul de a primi notificări prin mail în legătură cu oferte, reduceri, etc.
+Clienții pot cumpăra copii ale albumelor și se pot abona la categoriile afișate
+pe site-ul magazinului, cu scopul de a primi notificări prin mail în legătură
+cu oferte, reduceri, etc.
 
 \section{Constrângerile impuse asupra modelului}
 
@@ -151,7 +154,7 @@ Modelul de date respectă o serie de restricții de funcționare:
               de la data creării acestuia); astfel, un client nu poate avea
               mai multe abonamente active la aceeași categorie.
         \item O persoană poate fi înregistrată drept \emph{client} chiar dacă nu
-              a cumpărat încă nicio copie și nu a făcut niciun abonament.
+              a cumpărat încă nici o copie și nu a făcut nici un abonament.
 
 \end{m_itemize}
 
@@ -324,7 +327,9 @@ Numele entităților / relațiilor, împreună cu numele atributelor și descrie
                 \item \emph{last\_name}: \str care reprezintă numele artistului;
                 \item \emph{date\_birth}: \datet care reprezintă data nașterii artistului;
                 \item \emph{date\_death}: \datet care reprezintă data decesului
-                        artistului, valoarea poate fi \nnull\footnote{Implicit, atributele pentru care nu se precizează că \emph{pot avea valori null}, au proprietatea \textbf{\emph{not null}}.}.
+                      artistului, valoarea poate fi \nnull\footnote{Implicit,
+                      atributele pentru care nu se precizează că \emph{pot avea
+                      valori null}, au proprietatea \textbf{\emph{not null}}.}.
         \end{m_itemize}
 
 \item \textbf{GROUP}:
@@ -446,8 +451,7 @@ Deoarece \textbf{FN1} nu admite atribute cu valori non-atomice,
 
 \textbf{ALBUMS\_1} conține
 toate atributele din \textbf{ALBUMS\_0} cu excepția celui cu valori multiple (\textbf{tracks}),
-iar \textbf{ALBUMS\_2} conține câte o înregistrare separată pentru fiecare
-track asociat albumului.
+iar \textbf{ALBUMS\_2} conține câte o înregistrare pentru fiecare track asociat albumului.
 
 Printr-o operație de \emph{join} între cele două tabele obținute, se accesează
 (fără pierdere de informație) toate track-urile din componența unui album.
@@ -743,7 +747,7 @@ Cererea este următoarea:
     \caption{Arbore algebric optimizat}
 \end{figure}
 
-\section{Realizarea normalizării la formele superioare, aplicarea denormalizării}
+\section{Normalizarea la formele superioare și aplicarea denormalizării}
 
 \subsection{Normalizarea la \textbf{BCNF}, \textbf{FN4}, \textbf{FN5}}
 
@@ -865,10 +869,10 @@ anterior este \textbf{ATTACHED\_TO}, normalizarea se face în felul următor:
 
 \subsection{Denormalizarea}
 
-Din diagrama conceptuală prezentată la cerința \ref{ldiagconcept}, avem relația:
+În diagrama conceptuală prezentată la cerința \ref{ldiagconcept}, avem relația:
 
 \begin{m_itemize}[after=]
-        \item \textbf{COPY(album\_id\#, id\#, serial\_number, price, customer\_id)};
+        \item \textbf{COPY (album\_id\#, id\#, serial\_number, price, customer\_id)};
         \item \textbf{Copia este dependentă de album și are, pe lângă
               atributele cheii primare, un cod de serie, preț și un atribut
               care face legătura cu tabela CUSTOMERS (acesta poate avea valoarea
@@ -880,13 +884,13 @@ accesează o copie, este improbabil să nu se acceseze în aceeași cerere și
 cumpărătorul (dacă copia este vândută). Se alege, astfel, denormalizarea
 relației cu scopul eliminării operației de \emph{join} cu tabela
 \textbf{CUSTOMERS}, necesară pentru a obține numele și mail-ul posibilului
-cumpărător.
+cumpărător:
 
 \begin{m_itemize}[after=]
-        \item \textbf{COPY(album\_id\#, id\#, serial\_number, price, customer\_id, customer\_name, customer\_email)}
+        \item \textbf{COPY (album\_id\#, id\#, serial\_number, price, customer\_id, customer\_name, customer\_email)}
 \end{m_itemize}
 
-Relația nu mai este in \textbf{FN3} deoarece se observă dependența tranzitivă:
+Relația nu mai este în \textbf{FN3} deoarece se observă dependența tranzitivă:
 \begin{m_itemize}
 \item \{album\_id\#, id\#\} $\rightarrow$ \{custmer\_id\} $\rightarrow$ \{customer\_name\}
 \end{m_itemize}

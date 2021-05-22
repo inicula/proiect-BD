@@ -63,7 +63,7 @@
     \put(0.42063828,0.05665369){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\texttt{category}\\\texttt{id\#}\end{tabular}}}}%
     \put(0.15687408,0.27229012){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\texttt{customer\_category}\\\texttt{customer\_id\#}\\\texttt{category\_id\#}\\\end{tabular}}}}%
     \put(0.63421883,0.27275992){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\texttt{employee\_category}\\\texttt{employee\_id\#}\\\texttt{category\_id\#}\\\end{tabular}}}}%
-    \put(0.38441059,0.44514343){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\texttt{customer\_category}\\\texttt{customer\_id\#}\\\texttt{category\_id\#}\\\end{tabular}}}}%
+    \put(0.38441059,0.44514343){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\texttt{customer\_employee}\\\texttt{customer\_id\#}\\\texttt{employee\_id\#}\\\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{fn5_example.pdf}}%
   \end{picture}%
 \endgroup%
