@@ -88,7 +88,8 @@
 }
 
 \title{Management-ul unui magazin de muzică}
-\author{Nicula Ionuț-Cosmin \\ \emph{mail: }\texttt{ionut.nicula@s.unibuc.ro} \\\hspace{35pt}\texttt{niculaionut@tutanota.com}
+\author{Nicula Ionuț-Cosmin \\ \emph{mail: }\texttt{ionut.nicula@s.unibuc.ro}
+        \\\hspace{35pt}\texttt{niculaionut@tutanota.com}
 \\ \emph{surse: }\texttt{github.com/niculaionut/proiect-bd}}
 
 \begin{document}
@@ -103,7 +104,53 @@
 
 \section{Descrierea modelului și a utilității acestuia}
 
+Modelul de date va gestiona informații legate de management-ul unui magazin de
+muzică. Modelul facilitează accesul la informații despre statutul angajaților
+magazinului, despre albume, copiile fizice ale acestora, compozitori, artiști,
+clienți ai magazinului etc.
+
+În compunerea și înregistrarea track-urilor componente ale albumelor participă grupuri de artiști.
+
+Pentru fiecare artist, modelul reține o scurtă listă de informații precum numele, prenumele, data
+nașterii, locul nașterii.
+
+Pe job-urile din cadrul magazinului lucrează o serie de angajați. Anumiți
+angajați pot face abonamente clienților.
+
+Clienții pot cumpăra copii ale albumelor și se pot abona la categoriile afișate pe site-ul magazinului, cu scopul de a primi notificări prin mail în legătură cu oferte, reduceri, etc.
+
 \section{Constrângerile impuse asupra modelului}
+
+Modelul de date respectă o serie de restricții de funcționare:
+
+\begin{m_itemize}
+        \item Artiștii au asociat un loc de naștere sub forma unui oraș, care
+              la rândul lui are o țară asociată;
+        \item Un artist se poate alătura unui grup o singură dată;
+        \item Un artist poate părăsi ulterior un anumit grup și nu se mai poate
+              alătura din nou aceluiași grup;
+        \item Un album face parte dintr-o singură categorie muzicală și este
+              realizat de un singur grup;
+        \item Un album are cel puțin un track în componența acestuia;
+        \item O copie fizică a unui album (CD, DVD, etc.) poate fi cumpărată de
+              cel mult un client. Aceasta se vinde permanent, nu se
+              închiriază și nu poate fi returnată magazinului în urma
+              achiziționării;
+        \item Dacă o copie nu are un client (cumpărător) asociat, se consideră
+              că acea copie este încă nevândută;
+        \item Un grup nu poate fi gol; trebuie să aibă minim un membru în
+              componența sa;
+        \item Doar angajații având job-ul \emph{cashier} pot face abonamente
+              clienților.
+        \item Dacă un client este abonat la o categorie iar abonamentul
+              respectiv expiră la data \emph{d}, atunci el se mai poate abona
+              la categoria respectivă doar după data \emph{d}.
+        \item Un abonament are durata minimă de o săptămână (i.e. data
+              expirării unui abonament trebuie să fie minim peste o săptămâna
+              de la data creării acestuia); astfel, un client nu poate avea
+              mai multe abonamente active la aceeași categorie.
+
+\end{m_itemize}
 
 \section{Descrierea entităților}
 
@@ -138,7 +185,8 @@ Numele entităților, împreună cu descrierea acestora:
 
 \item \textbf{TRACK}:
         \begin{m_itemize}
-                \item Entitate care reprezintă un track individual din componența unui album.
+                \item Entitate dependentă de \textbf{ALBUM}; reprezintă un
+                      track individual din componența unui album.
         \end{m_itemize}
 
 \item \textbf{CATEGORY}:
@@ -148,12 +196,12 @@ Numele entităților, împreună cu descrierea acestora:
 
 \item \textbf{COPY}:
         \begin{m_itemize}
-                \item Entitate care reprezintă o copie fizică a unui album.
+                \item Entitate dependentă de \textbf{ALBUM}; reprezintă o copie fizică a unui album.
         \end{m_itemize}
 
 \item \textbf{CUSTOMER}:
         \begin{m_itemize}
-                \item Entitate care reprezintă un client înregistrat pe site-ul magazinului.
+                \item Entitate care reprezintă un client înregistrat pe site-ul magazinului;
                 \item Acesta poate cumpăra copii fizice ale albumelor și se
                       poate abona la categoriile disponibile pe site-ul magazinului.
         \end{m_itemize}
@@ -185,55 +233,55 @@ Fiecare entitate dintre toate celelalte are în componență un atribut \textbf{
 
 \item \textbf{LOCATION} \emph{se află în} \textbf{COUNTRY}:
         \begin{m_itemize}%[noitemsep, topsep=0pt, after=\vspace{.5\baselineskip}]
-                \item Identifică țara în care se află o locație.
+                \item Identifică țara în care se află o locație;
                 \item Are cardinalitatea {\texttt{M(0):1(1)}.}
         \end{m_itemize}
 
 \item \textbf{ARTIST} \emph{este născut în} \textbf{LOCATION}:
         \begin{m_itemize}
-                \item Identifică locația în care un artist este născut.
+                \item Identifică locația în care un artist este născut;
                 \item Are cardinalitatea {\texttt{M(0):1(1)}.}
         \end{m_itemize}
 
 \item \textbf{ARTIST} \emph{face parte din} \textbf{GROUP}:
         \begin{m_itemize}
-                \item Realizează legătura dintre artist și grupurile din care face parte.
+                \item Realizează legătura dintre artist și grupurile din care face parte;
                 \item Are cardinalitatea {\texttt{M(1):M(0)}.}
         \end{m_itemize}
 
 \item \textbf{ALBUM} \emph{este compus de} \textbf{GROUP}:
         \begin{m_itemize}
-                \item Realizează legătura dintre album și grupul de care este compus.
+                \item Realizează legătura dintre album și grupul de care este compus;
                 \item Are cardinalitatea {\texttt{M(0):1(1)}.}
         \end{m_itemize}
 
 \item \textbf{TRACK} \emph{face parte din} \textbf{ALBUM}:
         \begin{m_itemize}
-                \item Face legătura dintre album și track-urile din componența sa.
+                \item Face legătura dintre album și track-urile din componența sa;
                 \item Are cardinalitatea {\texttt{M(1):1(1)}.}
         \end{m_itemize}
 
 \item \textbf{ALBUM} \emph{face parte din} \textbf{CATEGORY}:
         \begin{m_itemize}
-                \item Realizează legătura dintre album și categoria din care acesta face parte.
+                \item Realizează legătura dintre album și categoria din care acesta face parte;
                 \item Are cardinalitatea {\texttt{M(0):1(1)}.}
         \end{m_itemize}
 
 \item \textbf{COPY} \emph{este copie a albumului} \textbf{ALBUM}:
         \begin{m_itemize}
-                \item Realizează legătura dintre album și copiile fizice ale acestuia.
+                \item Realizează legătura dintre album și copiile fizice ale acestuia;
                 \item Are cardinalitatea {\texttt{M(0):1(1)}.}
         \end{m_itemize}
 
 \item \textbf{EMPLOYEE} \emph{este angajat ca} \textbf{JOB}:
         \begin{m_itemize}
-                \item Realizează legătura dintre angajat și job-ul său.
+                \item Realizează legătura dintre angajat și job-ul său;
                 \item Are cardinalitatea {\texttt{M(0):1(1)}.}
         \end{m_itemize}
 
 \item \textbf{CUSTOMER} \emph{cumpără} \textbf{COPY}:
         \begin{m_itemize}
-                \item Realizează legătura dintre client și copiile pe care acesta le-a cumpărat.
+                \item Realizează legătura dintre client și copiile pe care acesta le-a cumpărat;
                 \item Are cardinalitatea {\texttt{1(0):M(0)}.}
         \end{m_itemize}
 
@@ -248,7 +296,7 @@ Fiecare entitate dintre toate celelalte are în componență un atribut \textbf{
 
 \section{Descrierea atributelor}
 
-Numele entităților, împreună cu numele atributelor și descrierea fiecăruia:
+Numele entităților / relațiilor, împreună cu numele atributelor și descrierea fiecăruia:
 
 \begin{enumerate}[noitemsep, label=\roman*.]
 
@@ -332,7 +380,18 @@ Numele entităților, împreună cu numele atributelor și descrierea fiecăruia
                 \item \emph{id}: \nump care reprezintă id-ul job-ului;
                 \item \emph{title}: \str care reprezintă titlul job-ului;
                 \item \emph{min\_salary}: \numpp care reprezintă salariul minim al job-ului;
-                \item \emph{max\_salary}: \numpp care reprezintă salariul maxim job-ului.
+                \item \emph{max\_salary}: \numpp care reprezintă salariul maxim al job-ului.
+        \end{m_itemize}
+
+\item \textbf{ARTIST} \emph{face parte din} \textbf{GROUP}:
+        \begin{m_itemize}
+                \item \emph{left\_group\_date}: \datet care reprezintă data la care
+                      artistul a părăsit un anumit grup.
+        \end{m_itemize}
+
+\item \textbf{CUSTOMER} \emph{se abonează la} \textbf{CATEGORY} \emph{prin intermediul} \textbf{EMPLOYEE}:
+        \begin{m_itemize}
+                \item \emph{expiry\_date}: \datet care reprezintă data la care abonamentul expiră.
         \end{m_itemize}
 
 \end{enumerate}
@@ -357,7 +416,8 @@ Numele entităților, împreună cu numele atributelor și descrierea fiecăruia
 
 \subsection{FN1}
 
-Se ia ca exemplu de \textbf{non-FN1} tabela \textbf{ALBUMS\_0}, având următoarele atribute și înregistrări:
+Se ia ca exemplu de \textbf{non-FN1} tabela \textbf{ALBUMS\_0}. Un album are id
+unic, este realizat de un singur grup, are un titlu și conține unul sau mai multe track-uri.
 
 % inainte de normalizare
 
@@ -380,7 +440,7 @@ Deoarece \textbf{FN1} nu admite atribute cu valori non-atomice,
 \textbf{ALBUMS\_0} se împarte în două tabele.
 
 \textbf{ALBUMS\_1} conține
-toate atributele din \textbf{ALBUMS\_0} cu excepția celui cu valori multiple,
+toate atributele din \textbf{ALBUMS\_0} cu excepția celui cu valori multiple (\textbf{tracks}),
 iar \textbf{ALBUMS\_2} conține câte o înregistrare separată pentru fiecare
 track asociat albumului.
 
@@ -411,7 +471,7 @@ Printr-o operație de \emph{join} între cele două tabele obținute, se accesea
 \begin{tabular}{$c^c}
         \hline
         \rowstyle{\bfseries}
-        id\# & track \\
+        id\# & track\# \\
         \hline
         1 & Pigs \\
         \hline
@@ -618,15 +678,53 @@ Secvența următoare este folosită la introducerea datelor în tabela
 
 \end{center}
 
+\section{-}
+
+\section{-}
+
 \section{Cereri cu operații \emph{outer-join} și \emph{division}}
 
 \begin{center}
 
 \minipage{\linewidth}
-\lstinputlisting[caption=Cerere cu operație \emph{outer-join}]{../../queries/21.sql}
+\lstinputlisting[caption=Cerere cu operație \emph{outer-join}]{../../queries/7.sql}
 \endminipage
 
 \end{center}
+
+\section{Optimizarea unei cereri}
+
+\lstinputlisting[language=, caption=Expresie algebrică neoptimizată]{../../queries/algrel_unoptimized.txt}
+
+\lstinputlisting[language=, caption=Expresie algebrică optimizată]{../../queries/algrel_optimized.txt}
+
+\begin{center}
+
+\minipage{\linewidth}
+\lstinputlisting[caption=Cerere SQL neoptimizată]{../../queries/neoptimizat.sql}
+\endminipage
+
+\end{center}
+
+\begin{center}
+
+\minipage{\linewidth}
+\lstinputlisting[caption=Cerere SQL optimizată]{../../queries/optimizat.sql}
+\endminipage
+
+\end{center}
+
+\begin{figure}[H]
+    \centering
+    \incfig{unoptimized_query}
+    \caption{Arbore algebric neoptimizat}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \incfig{optimized_query}
+    \caption{Arbore algebric optimizat}
+\end{figure}
 
 \section{Realizarea normalizării la formele superioare, aplicarea denormalizării}
 
@@ -638,11 +736,12 @@ Se consideră ca exemplu \textbf{non-BCNF} relația:
 
 \begin{m_itemize}
         \item \textbf{FREQUENT\_0 (category\_id\#, customer\_email\#, customer\_id)}
+        \item \textbf{Face legătura dintre un client și categoriile pe care le
+              frecventează des (pe site-ul magazinului).  O categorie poate
+              fi frecventată de mai mulți clienți, iar un client poate frecventa mai
+multe categorii. Clienții au email-uri și id-uri unice.}
 \end{m_itemize}
 
-Relația face legătura dintre un client și categoriile pe care le frecventează des (pe site-ul magazinului).
-O categorie poate fi frecventată de mai mulți clienți, iar un client poate
-frecventa mai multe categorii. Clienții au email-uri și id-uri unice.
 
 Astfel, se observă dependențele funcționale:
 
@@ -666,7 +765,9 @@ Se consideră ca exemplu \textbf{non-FN4} relația următoare:
 
 \begin{m_itemize}[after=]
         \item \textbf{GROUP\_INFO\_0 (group\_id\#, manager\_id\#, artist\_id\#)};
-        \item \textbf{Un grup poate avea mai mulți impresari și mai mulți artiști în componența sa. Artiștii și impresarii, la rândul lor, pot avea mai multe grupuri asociate}.
+        \item \textbf{Un grup poate avea mai mulți impresari și mai mulți
+              artiști în componența sa. Artiștii și impresarii, la rândul
+              lor, pot avea mai multe grupuri asociate}.
 \end{m_itemize}
 
 
@@ -696,12 +797,10 @@ detaliată în secțiunea \ref{descrel}:
 
 \begin{itemize}[label=\textbullet, noitemsep, topsep=0pt, after=]
 
-\item \textbf{CUSTOMER} \emph{se abonează la} \textbf{CATEGORY} \emph{prin intermediul} \textbf{EMPLOYEE}:
-        \begin{m_itemize}
-                \item Realizează legătura dintre client, categorie și angajat;
-                \item Reprezintă un abonament prin prisma căruia se pot trimite clientului oferte, reduceri, etc;
-                \item Are cardinalitatea \texttt{M(0):M(0):M(0)}.
-        \end{m_itemize}
+\item \textbf{CUSTOMER} \emph{se abonează la} \textbf{CATEGORY} \emph{prin intermediul} \textbf{EMPLOYEE};
+      \item Realizează legătura dintre client, categorie și angajat;
+      \item Reprezintă un abonament prin prisma căruia se pot trimite clientului oferte, reduceri, etc;
+      \item Are cardinalitatea \texttt{M(0):M(0):M(0)}.
 
 \end{itemize}
 
@@ -712,11 +811,11 @@ care deține abonamentul / categoria pe care abonamentul este făcut / angajatul
 prin intermediul căruia s-a făcut abonamentul}. Astfel, dacă relația s-ar
 împărți în trei relații diferite (de la \textbf{CUSTOMER} la \textbf{CATEGORY}
 și \textbf{EMPLOYEE}, și de la \textbf{EMPLOYEE} la \textbf{CATEGORY}), s-ar
-ști, spre exemplu, că un client $\alpha$ este abonat la o mulțime de categorii
-$\beta$, și că abonamentele sale au fost făcute de angajați dintr-o mulțime $\gamma$,
-însă nu s-ar putea răspunde la query-ul \emph{Pentru fiecare categorie la care
-clientul $\alpha$ este abonat, să se afișeze informații despre angajatul care
-i-a făcut acel abonament.}
+ști, spre exemplu, că un client $\alpha$ este abonat la categorii dintr-o mulțime
+$\beta$, și că abonamentele sale au fost făcute de angajați dintr-o mulțime
+$\gamma$, însă nu s-ar putea răspunde la query-ul \emph{Pentru fiecare
+categorie la care clientul $\alpha$ este abonat, să se afișeze informații
+despre angajatul care i-a făcut acel abonament.}
 
 Așadar, considerăm următoarea relație de tip 3 \emph{ciclică}\footnote{i.e. o
 relație care \emph{poate} fi descompusă în trei relații diferite \emph{fără
@@ -725,21 +824,19 @@ descrierea:
 
 \begin{itemize}[label=\textbullet, noitemsep, topsep=0pt, after=]
         \item \textbf{CUSTOMER} \emph{se abonează la} \textbf{CATEGORY};
-              \textbf{CUSTOMER} \emph{are abonamente făcute de} \textbf{EMPLOYEE};
-              \textbf{EMPLOYEE} \emph{poate face abonamente pe categoria} \textbf{CATEGORY}
-        \begin{m_itemize}
-                \item Realizează trei legături independente: identifică
-                      categoriile la care un client este abonat, identifică
-                      angajații care i-au făcut cel puțin un abonament
-                      clientului, identifică angajații care pot face
-                      abonamente pentru o anumită categorie.
-                \item Are cardinalitatea \texttt{M(0):M(0):M(0)}.
-        \end{m_itemize}
+              \textbf{CUSTOMER} \emph{are abonament făcut de} \textbf{EMPLOYEE};
+              \textbf{EMPLOYEE} \emph{poate face abonamente pe categoria} \textbf{CATEGORY};
+        \item Realizează trei legături independente: identifică
+              categoriile la care un client este abonat, identifică
+              angajații care i-au făcut cel puțin un abonament
+              clientului, identifică angajații care pot face
+              abonamente pentru o anumită categorie;
+        \item Are cardinalitatea \texttt{M(0):M(0):M(0)}.
 
 \end{itemize}
 
-Pentru a normaliza tabela la \textbf{FN5}, relația ciclică de tip 3 se
-descompune în trei relații de tip 2. Presupunând că numele relației descrise
+Pentru normalizarea la \textbf{FN5}, relația de tip 3 ciclică se
+descompune în trei relații de tip \emph{many-to-many}. Presupunând că numele relației descrise
 anterior este \textbf{ATTACHED\_TO}, normalizarea se face în felul următor:
 
 \begin{figure}[H]
@@ -750,5 +847,6 @@ anterior este \textbf{ATTACHED\_TO}, normalizarea se face în felul următor:
 \end{figure}
 
 \subsection{Denormalizarea}
+
 
 \end{document}

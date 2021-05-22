@@ -1,0 +1,12 @@
+PROJECT(JOIN(JOIN(PROJECT(group,
+                          id),
+                  SELECT(PROJECT(group_member,
+                                 group_id,
+                                 member_id),
+                         member_id % 2 = 0)),
+             SELECT(PROJECT(album,
+                            group_id,
+                            title)
+                    lower(title) like '%s%')),
+        member_id,
+        title)

@@ -10,15 +10,16 @@ where to_char(s.expiry_date, 'yyyy') = '2020' and
              where e.id = s.employee_id and
                    mod(length(e.last_name), 2) = 1);
 
---Se presupune ca in urma stergerii unor copii din baza de date,
---au ramas clienti care nu au asociata nicio copie cumparata anterior.
---Sterge acesti clienti din tabela Customers
+--Sterge din tabela CUSTOMERS toti clientii care nu au nicio
+--copie cumparata si nu au facut niciun abonament.
 
 delete from customers cust
 where not exists(select c.id
                  from copies c
                  where c.customer_id is not null and
-                       c.customer_id = cust.id);
+                       c.customer_id = cust.id)
+      and cust.id not in (select distinct s.customer_id
+                          from subscriptions s);
 
 --Mareste cu 10% salariul angajatilor ale caror prenume contin
 --litera 'm'. Se va tine cont de faptul ca salariul lor nu poate
