@@ -47,22 +47,22 @@ create table tracks(
         album_id number(3) not null references Albums(id),
         id       number(3) not null,
         title    varchar(50) not null,
-        length   number(5) not null,
+        length   number(5) not null check (length > 0),
         primary key(album_id, id)
 );
 
 create table jobs(
         id         number(3) not null primary key,
         title      varchar(50) not null,
-        min_salary number(5) not null,
-        max_salary number(5) not null
+        min_salary number(5) not null check (min_salary > 0),
+        max_salary number(5) not null check (max_salary > 0)
 );
 
 create table employees(
         id         number(3) not null primary key,
         first_name varchar(50) not null,
         last_name  varchar(50) not null,
-        salary     number(5) not null,
+        salary     number(5) not null check (salary > 0),
         hire_date  date not null,
         job_id     number(3) not null references Jobs(id)
 );
@@ -78,7 +78,7 @@ create table copies(
         album_id      number(3) not null references Albums(id),
         id            number(3) not null,
         serial_number varchar(8) not null unique,
-        price         number(5) not null,
+        price         number(5) not null check (price > 0),
         customer_id   number(3) references Customers(id),
         primary key   (album_id, id)
 );

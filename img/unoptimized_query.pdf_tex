@@ -64,5 +64,6 @@
     \put(0.06335555,0.04831456){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\texttt{group\_member}\end{tabular}}}}%
     \put(0.34149174,0.23960092){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\footnotesize{group.id =}\\\footnotesize{group\_member.group\_id}\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{unoptimized_query.pdf}}%
+    \put(0.60188319,0.3619893){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\footnotesize{groups.id = albums.group\_id}\end{tabular}}}}%
   \end{picture}%
 \endgroup%

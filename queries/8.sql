@@ -5,7 +5,7 @@ from (select distinct customer_id
       from subscriptions) c
 where not exists (select 1
                   from categories cat
-                  where (c.customer_id, cat.id))
+                  where (c.customer_id, cat.id)
                         not in (select s.customer_id,
                                        s.category_id
                                 from subscriptions s));

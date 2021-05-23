@@ -3,16 +3,16 @@
 \usepackage[utf8]{inputenc}
 \usepackage{pdfpages}
 \usepackage{indentfirst}
+\usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
-\usepackage[margin=0.5in]{geometry}
+\usepackage[margin=0.60in]{geometry}
 \usepackage{textcomp}
 \usepackage{color}
 \usepackage{pdflscape}
 \usepackage[hidelinks]{hyperref}
 \usepackage{enumitem}
-\usepackage{libertine}
-\usepackage{libertinust1math}
+\usepackage{mlmodern}
 \usepackage[T1]{fontenc}
 \usepackage[scaled=0.9]{DejaVuSansMono}
 \usepackage[stable]{footmisc}
@@ -148,11 +148,11 @@ Modelul de date respectă o serie de restricții de funcționare:
               clienților.
         \item Dacă un client este abonat la o categorie iar abonamentul
               respectiv expiră la data \emph{d}, atunci el se mai poate abona
-              la categoria respectivă doar după data \emph{d}.
+              la categoria respectivă doar după data \emph{d};
         \item Un abonament are durata minimă de o săptămână (i.e. data
               expirării unui abonament trebuie să fie minim peste o săptămâna
               de la data creării acestuia); astfel, un client nu poate avea
-              mai multe abonamente active la aceeași categorie.
+              mai multe abonamente active la aceeași categorie;
         \item O persoană poate fi înregistrată drept \emph{client} chiar dacă nu
               a cumpărat încă nici o copie și nu a făcut nici un abonament.
 
@@ -214,7 +214,7 @@ Numele entităților, împreună cu descrierea acestora:
 
 \item \textbf{EMPLOYEE}:
         \begin{m_itemize}
-                \item Entitate care reprezintă un angajat al magazinului.
+                \item Entitate care reprezintă un angajat al magazinului;
                 \item În funcție de job, anagajatul desfășoară anumite activități.
         \end{m_itemize}
 
@@ -350,7 +350,7 @@ Numele entităților / relațiilor, împreună cu numele atributelor și descrie
                 \item \emph{album\_id}: \nump care reprezintă id-ul albumului din care face parte track-ul;
                 \item \emph{id}: \nump care reprezintă id-ul track-ului;
                 \item \emph{title}: \str care reprezintă titlul track-ului;
-                \item \emph{length}: \numpp care reprezintă durata în minute a track-ului.
+                \item \emph{length}: \numpp care reprezintă durata în minute a track-ului; este strict mai mare decât 0.
         \end{m_itemize}
 
 \item \textbf{CATEGORY}:
@@ -380,7 +380,7 @@ Numele entităților / relațiilor, împreună cu numele atributelor și descrie
                 \item \emph{id}: \nump care reprezintă id-ul angajatului;
                 \item \emph{first\_name}: \str care reprezintă prenumele angajatului;
                 \item \emph{last\_name}: \str care reprezintă numele angajatului;
-                \item \emph{salary}: \numpp care reprezintă salariul angajatului;
+                \item \emph{salary}: \numpp care reprezintă salariul angajatului; este strict mai mare decât 0;
                 \item \emph{hire\_date}: \datet care reprezintă data angajării angajatului.
         \end{m_itemize}
 
@@ -388,8 +388,8 @@ Numele entităților / relațiilor, împreună cu numele atributelor și descrie
         \begin{m_itemize}
                 \item \emph{id}: \nump care reprezintă id-ul job-ului;
                 \item \emph{title}: \str care reprezintă titlul job-ului;
-                \item \emph{min\_salary}: \numpp care reprezintă salariul minim al job-ului;
-                \item \emph{max\_salary}: \numpp care reprezintă salariul maxim al job-ului.
+                \item \emph{min\_salary}: \numpp care reprezintă salariul minim al job-ului; este strict mai mare decât 0;
+                \item \emph{max\_salary}: \numpp care reprezintă salariul maxim al job-ului; este strict mai mare decât 0.
         \end{m_itemize}
 
 \item \textbf{ARTIST} \emph{face parte din} \textbf{GROUP}:
@@ -901,9 +901,120 @@ Relația nu mai este în \textbf{FN3} deoarece se observă dependența tranzitiv
 \section{\emph{Screenshot}-uri cerința 10}
 \label{screengenins}
 
+\includepdf{../../img/gen/1.png}
+
+\bigskip
+
+\includepdf{../../img/gen/2.png}
+
+\bigskip
+
+\includepdf{../../img/gen/3.png}
+
+\bigskip
+
+\includepdf{../../img/gen/4.png}
+
+\bigskip
+
+\includepdf{../../img/gen/5.png}
+
+\bigskip
+
+\includepdf{../../img/gen/6.png}
+
+\bigskip
+
+\includepdf{../../img/gen/7.png}
+
+\bigskip
+
+\includepdf{../../img/gen/8.png}
+
+\bigskip
+
+\includepdf{../../img/gen/9.png}
+
+\bigskip
+
+\includepdf{../../img/gen/10.png}
+
+\bigskip
+
+\includepdf{../../img/gen/11.png}
+
+\bigskip
+
+\includepdf{../../img/gen/12.png}
+
+\bigskip
+
+\includepdf{../../img/gen/13.png}
+
 \section{\emph{Screenshot}-uri cerința 11}
+
+\includepdf{../../img/queries/1.png}
+
+\bigskip
+
+\includepdf{../../img/queries/2.png}
+
+\bigskip
+
+\includepdf{../../img/queries/3.png}
+
+\bigskip
+
+\includepdf{../../img/queries/4.png}
+
+\bigskip
+
+\includepdf{../../img/queries/5.png}
+
+\bigskip
+
 \section{\emph{Screenshot}-uri cerința 12}
+
+\includepdf{../../img/queries/6p1.png}
+
+\bigskip
+
+\includepdf{../../img/queries/6p2.png}
+
+\bigskip
+
+\includepdf{../../img/queries/6p3.png}
+
+\bigskip
+
+\section{\emph{Screenshot}-uri cerința 13}
+
+\includepdf{../../img/gen/secventa.png}
+
+\bigskip
+
 \section{\emph{Screenshot}-uri cerința 16}
+
+\includepdf{../../img/queries/7.png}
+
+\bigskip
+
+\includepdf{../../img/queries/8p1.png}
+
+\bigskip
+
+\includepdf{../../img/queries/8p2.png}
+
+\bigskip
+
 \section{\emph{Screenshot}-uri cerința 17}
+
+\includepdf{../../img/queries/99p1.png}
+
+\bigskip
+
+\includepdf{../../img/queries/99p2.png}
+
+\bigskip
 
 \end{document}

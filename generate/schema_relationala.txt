@@ -10,7 +10,7 @@ ARTIST (id#,
         last_name,
         date_birth,
         date_death,
-        location_id)
+        birth_location_id)
 
 GROUP (id#,
        name)

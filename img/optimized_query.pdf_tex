@@ -72,6 +72,7 @@
     \put(0,0){\includegraphics[width=\unitlength,page=9]{optimized_query.pdf}}%
     \put(0.68530702,0.05093805){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\footnotesize{group\_member}\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=10]{optimized_query.pdf}}%
-    \put(0.60518316,0.45525625){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\footnotesize{id = group\_id}\end{tabular}}}}%
+    \put(0.60518316,0.45525625){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\footnotesize{group.id = group\_member.group\_id}\end{tabular}}}}%
+    \put(0.547309,0.52380131){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\footnotesize{album.id = group.id}\end{tabular}}}}%
   \end{picture}%
 \endgroup%

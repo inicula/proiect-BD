@@ -1,10 +1,10 @@
---Prelungeste pana la 1 ianuarie 2022 toate abonamentele care au
---expirat in anul 2020 si care au fost facute de un angajat al
+--Prelungeste pana la 1 ianuarie 2025 toate abonamentele care
+--expira in anul 2023 si care au fost facute de un angajat al
 --carui nume contine numar impar de litere.
 
 update subscriptions s
-set s.expiry_date = to_date('01/01/2022')
-where to_char(s.expiry_date, 'yyyy') = '2020' and
+set s.expiry_date = to_date('01/01/2025')
+where to_char(s.expiry_date, 'yyyy') = '2023' and
       exists(select e.id
              from employees e
              where e.id = s.employee_id and
